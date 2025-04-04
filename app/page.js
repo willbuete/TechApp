@@ -5,7 +5,6 @@ import { useEffect, useState, useMemo } from 'react';
 function IconDailyWorkout() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Lightning bolt icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
     </svg>
   );
@@ -13,7 +12,6 @@ function IconDailyWorkout() {
 function IconAccounting() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Currency Dollar icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-3.314 0-6 1.79-6 4s2.686 4 6 4 6-1.79 6-4-2.686-4-6-4z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m0 14v1" />
     </svg>
@@ -22,7 +20,6 @@ function IconAccounting() {
 function IconValuation() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Chart Line icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17l3-3 4 4" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11l3-3" />
@@ -32,7 +29,6 @@ function IconValuation() {
 function IconDCF() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Cash icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 12h2m16 0h2M12 2v2m0 16v2" />
     </svg>
@@ -41,7 +37,6 @@ function IconDCF() {
 function IconMA() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Handshake icon (using two intersecting paths to simulate a handshake) */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4l3 6-3 6-3-6 3-6z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12" />
     </svg>
@@ -50,7 +45,6 @@ function IconMA() {
 function IconLBO() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Building icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 3v4M8 3v4M3 10h18" />
     </svg>
@@ -59,8 +53,28 @@ function IconLBO() {
 function IconBrainTeaser() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Puzzle piece icon (using a simple polygon shape) */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2" />
+    </svg>
+  );
+}
+function IconPerformance() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6h6v6m-3-9a4 4 0 110-8 4 4 0 010 8z" />
+    </svg>
+  );
+}
+function IconNotifications() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1" />
+    </svg>
+  );
+}
+function IconMore() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M6 10a2 2 0 114 0 2 2 0 01-4 0zM10 4a2 2 0 100 4 2 2 0 000-4zm0 12a2 2 0 100 4 2 2 0 000-4z" />
     </svg>
   );
 }
@@ -76,7 +90,7 @@ const modulesData = [
   { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: <IconBrainTeaser /> }
 ];
 
-// QUESTIONS OBJECT – (using your questions data; omitted here for brevity; same as previous code)
+// QUESTIONS OBJECT – (Same as before; omitted here for brevity)
 const questions = {
   Accounting: {
     Basic: [
@@ -331,31 +345,38 @@ export default function FinancePrepApp() {
     return null;
   }, [selectedModule]);
 
-  // Determine questions based on selected module.
-  let subjectQuestions = null;
-  if (selectedModule) {
-    if (selectedModule.name === "Daily Workout") {
-      subjectQuestions = aggregatedDailyWorkout;
-    } else {
-      subjectQuestions = questions[selectedModule.name];
+  // Memoize subjectQuestions based on selected module
+  const subjectQuestionsMemo = useMemo(() => {
+    if (selectedModule) {
+      if (selectedModule.name === "Daily Workout") {
+        return aggregatedDailyWorkout;
+      } else {
+        return questions[selectedModule.name];
+      }
     }
-  }
+    return null;
+  }, [selectedModule, aggregatedDailyWorkout]);
+
   const hasCategories =
-    subjectQuestions &&
-    typeof subjectQuestions === "object" &&
-    !Array.isArray(subjectQuestions);
-  const currentQuiz =
-    hasCategories && selectedCategory
-      ? subjectQuestions[selectedCategory]
-      : !hasCategories && subjectQuestions
-      ? subjectQuestions
-      : [];
+    subjectQuestionsMemo &&
+    typeof subjectQuestionsMemo === "object" &&
+    !Array.isArray(subjectQuestionsMemo);
+
+  // Memoize currentQuiz to avoid unnecessary recomputations
+  const currentQuiz = useMemo(() => {
+    if (hasCategories && selectedCategory) {
+      return subjectQuestionsMemo[selectedCategory];
+    } else if (!hasCategories && subjectQuestionsMemo) {
+      return subjectQuestionsMemo;
+    }
+    return [];
+  }, [hasCategories, selectedCategory, subjectQuestionsMemo]);
+
   const currentQ = currentQuiz[qIndex];
 
-  // Simulate fetching news headlines (in real app, use an API or serverless function)
+  // Simulate fetching news headlines (in a real app, use an API)
   useEffect(() => {
     if (activeTab === "News") {
-      // For now, set static sample headlines.
       setNews([
         "Tech stocks soar amid market rally",
         "Federal Reserve hints at interest rate changes",
@@ -426,7 +447,6 @@ export default function FinancePrepApp() {
               clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
             }}
           >
-            {/* Replace with a professional app icon */}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
             </svg>
@@ -475,7 +495,7 @@ export default function FinancePrepApp() {
               {selectedModule && hasCategories && !selectedCategory && (
                 <div className="space-y-6">
                   <h2 className="text-xl text-gray-700 font-medium mb-4">Select Category</h2>
-                  {Object.keys(subjectQuestions).map((cat) => (
+                  {Object.keys(subjectQuestionsMemo).map((cat) => (
                     <button
                       key={cat}
                       onClick={() => {
