@@ -1,57 +1,82 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 
-// Professional SVG Icons (from Heroicons or similar)
-// You can replace the SVG paths with your own icons if needed.
-function IconTraining() {
+// --- Professional SVG Icon Components --- //
+function IconDailyWorkout() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
+      {/* Lightning bolt icon */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
     </svg>
   );
 }
-function IconPerformance() {
+function IconAccounting() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6h6v6m-3-9a4 4 0 110-8 4 4 0 010 8z" />
+      {/* Currency Dollar icon */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-3.314 0-6 1.79-6 4s2.686 4 6 4 6-1.79 6-4-2.686-4-6-4z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m0 14v1" />
     </svg>
   );
 }
-function IconStudy() {
+function IconValuation() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01-.665 6.062L12 17l-5.495 2.64a12.083 12.083 0 01-.665-6.062L12 14z" />
+      {/* Chart Line icon */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17l3-3 4 4" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11l3-3" />
     </svg>
   );
 }
-function IconNotifications() {
+function IconDCF() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      {/* Cash icon */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 12h2m16 0h2M12 2v2m0 16v2" />
     </svg>
   );
 }
-function IconMore() {
+function IconMA() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      {/* Handshake icon (using two intersecting paths to simulate a handshake) */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4l3 6-3 6-3-6 3-6z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12" />
+    </svg>
+  );
+}
+function IconLBO() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      {/* Building icon */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 3v4M8 3v4M3 10h18" />
+    </svg>
+  );
+}
+function IconBrainTeaser() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      {/* Puzzle piece icon (using a simple polygon shape) */}
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2" />
     </svg>
   );
 }
 
-// Replace module emojis with professional icons (you can replace these with your own SVGs)
+// Modules Data using professional icons.
 const modulesData = [
-  { name: 'Daily Workout', color: 'bg-[#FFA500]', icon: <IconTraining /> },
-  { name: 'Accounting', color: 'bg-[#17848E]', icon: <IconTraining /> },
-  { name: 'Valuation', color: 'bg-[#2D2E82]', icon: <IconTraining /> },
-  { name: 'Discounted Cash Flow', color: 'bg-[#FF5733]', icon: <IconTraining /> },
-  { name: 'M&A', color: 'bg-[#7D1E6A]', icon: <IconTraining /> },
-  { name: 'LBO', color: 'bg-[#F4A300]', icon: <IconTraining /> },
-  { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: <IconTraining /> }
+  { name: 'Daily Workout', color: 'bg-[#FFA500]', icon: <IconDailyWorkout /> },
+  { name: 'Accounting', color: 'bg-[#17848E]', icon: <IconAccounting /> },
+  { name: 'Valuation', color: 'bg-[#2D2E82]', icon: <IconValuation /> },
+  { name: 'Discounted Cash Flow', color: 'bg-[#FF5733]', icon: <IconDCF /> },
+  { name: 'M&A', color: 'bg-[#7D1E6A]', icon: <IconMA /> },
+  { name: 'LBO', color: 'bg-[#F4A300]', icon: <IconLBO /> },
+  { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: <IconBrainTeaser /> }
 ];
 
-// QUESTIONS OBJECT – (same as before; using your questions data)
+// QUESTIONS OBJECT – (using your questions data; omitted here for brevity; same as previous code)
 const questions = {
   Accounting: {
     Basic: [
@@ -249,7 +274,7 @@ function PerformanceTracer({ performanceData }) {
 }
 
 export default function FinancePrepApp() {
-  // Active Tab: "Training", "Performance", "Study", "Notifications", "More"
+  // Active Tab: "Training", "Performance", "News", "Notifications", "More"
   const [activeTab, setActiveTab] = useState("Training");
   const [selectedModule, setSelectedModule] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -260,9 +285,9 @@ export default function FinancePrepApp() {
   const [streak, setStreak] = useState(0);
   const [xp, setXp] = useState(0);
   const [xpBoost, setXpBoost] = useState(false);
-  const [showWorkout, setShowWorkout] = useState(false);
   const [performanceData, setPerformanceData] = useState({});
   const [performanceRecorded, setPerformanceRecorded] = useState(false);
+  const [news, setNews] = useState([]);
   const today = new Date().toDateString();
 
   // Load performance data on mount
@@ -327,6 +352,19 @@ export default function FinancePrepApp() {
       : [];
   const currentQ = currentQuiz[qIndex];
 
+  // Simulate fetching news headlines (in real app, use an API or serverless function)
+  useEffect(() => {
+    if (activeTab === "News") {
+      // For now, set static sample headlines.
+      setNews([
+        "Tech stocks soar amid market rally",
+        "Federal Reserve hints at interest rate changes",
+        "Oil prices spike as geopolitical tensions rise",
+        "Major merger shakes up the financial sector"
+      ]);
+    }
+  }, [activeTab]);
+
   const handleChoice = (choiceIndex) => {
     setSelectedChoice(choiceIndex);
     setShowResult(true);
@@ -364,7 +402,6 @@ export default function FinancePrepApp() {
     setSelectedChoice(null);
     setShowResult(false);
     setScore(0);
-    setShowWorkout(false);
     setPerformanceRecorded(false);
   };
 
@@ -389,7 +426,7 @@ export default function FinancePrepApp() {
               clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
             }}
           >
-            {/* Use a professional icon here (for example, a custom SVG or icon library) */}
+            {/* Replace with a professional app icon */}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
             </svg>
@@ -415,7 +452,7 @@ export default function FinancePrepApp() {
                         setSelectedModule(mod);
                         setQIndex(0);
                       }}
-                      className="flex items-center p-5 border border-gray-300 rounded-lg shadow-sm transition transform hover:scale-105 cursor-pointer bg-gray-50"
+                      className="flex items-center p-5 border border-gray-300 rounded-lg shadow transition transform hover:scale-105 cursor-pointer bg-gray-50"
                     >
                       <div
                         className="w-12 h-12 flex items-center justify-center text-white rounded"
@@ -445,7 +482,7 @@ export default function FinancePrepApp() {
                         setSelectedCategory(cat);
                         setQIndex(0);
                       }}
-                      className="w-full py-4 px-5 border border-gray-300 rounded-lg text-lg text-gray-700 shadow-sm transition transform hover:scale-105 bg-gray-50"
+                      className="w-full py-4 px-5 border border-gray-300 rounded-lg text-lg text-gray-700 shadow transition transform hover:scale-105 bg-gray-50"
                     >
                       {cat}
                     </button>
@@ -516,16 +553,39 @@ export default function FinancePrepApp() {
           {activeTab === "Performance" && (
             <PerformanceTracer performanceData={performanceData} />
           )}
-          {activeTab === "Study" && <div className="p-6 text-gray-600">Study tab placeholder</div>}
+          {activeTab === "News" && (
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Finance News Today</h2>
+              {news.length === 0 ? (
+                <p className="text-gray-600">Fetching news headlines...</p>
+              ) : (
+                <ul className="space-y-2">
+                  {news.map((headline, i) => (
+                    <li key={i} className="text-lg text-gray-700 border-b border-gray-200 pb-2">
+                      {headline}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
           {activeTab === "Notifications" && <div className="p-6 text-gray-600">Notifications placeholder</div>}
-          {activeTab === "More" && <div className="p-6 text-gray-600">More placeholder</div>}
+          {activeTab === "More" && (
+            <div className="p-6 text-gray-600 space-y-6">
+              <h2 className="text-2xl font-semibold text-gray-800">More</h2>
+              <div>
+                <h3 className="text-xl font-medium mb-2 text-gray-700">Internship Tracker</h3>
+                <p className="text-lg text-gray-700">[Internship tracker content placeholder]</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Bottom Navigation */}
         <nav className="bg-white border-t border-gray-200 flex justify-around py-4">
-          <NavItem icon={<IconTraining />} label="Training" active={activeTab==="Training"} onClick={()=> setActiveTab("Training")} />
+          <NavItem icon={<IconDailyWorkout />} label="Training" active={activeTab==="Training"} onClick={()=> setActiveTab("Training")} />
           <NavItem icon={<IconPerformance />} label="Performance" active={activeTab==="Performance"} onClick={()=> setActiveTab("Performance")} />
-          <NavItem icon={<IconStudy />} label="Study" active={activeTab==="Study"} onClick={()=> setActiveTab("Study")} />
+          <NavItem icon={<IconValuation />} label="News" active={activeTab==="News"} onClick={()=> setActiveTab("News")} />
           <NavItem icon={<IconNotifications />} label="Notifications" active={activeTab==="Notifications"} onClick={()=> setActiveTab("Notifications")} />
           <NavItem icon={<IconMore />} label="More" active={activeTab==="More"} onClick={()=> setActiveTab("More")} />
         </nav>
