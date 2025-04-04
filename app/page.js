@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 
-// MODULES – Daily Workout added at the top
+// MODULES – Daily Workout is added at the top
 const modules = [
   { name: 'Daily Workout', color: 'bg-[#FFA500]', icon: '🔥' },
   { name: 'Accounting', color: 'bg-[#17848E]', icon: '🧾' },
@@ -12,7 +12,7 @@ const modules = [
   { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: '🧩' }
 ];
 
-// QUESTIONS OBJECT – 10 questions per Basic/Advanced subject; Brain Teaser is a flat array.
+// QUESTIONS OBJECT (same as before)
 const questions = {
   Accounting: {
     Basic: [
@@ -173,19 +173,19 @@ function updateSubjectPerformance(subject, score, total, setPerformanceData) {
 
 function PerformanceTracer({ performanceData }) {
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Performance Tracker</h2>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Performance Tracker</h2>
       {Object.keys(performanceData).length === 0 ? (
-        <p>No performance data yet.</p>
+        <p className="text-gray-600">No performance data yet.</p>
       ) : (
         <table className="w-full text-left">
           <thead>
             <tr>
-              <th className="py-1">Subject</th>
-              <th className="py-1">Quizzes</th>
-              <th className="py-1">Total Qs</th>
-              <th className="py-1">Correct</th>
-              <th className="py-1">Accuracy</th>
+              <th className="py-2">Subject</th>
+              <th className="py-2">Quizzes</th>
+              <th className="py-2">Total Qs</th>
+              <th className="py-2">Correct</th>
+              <th className="py-2">Accuracy</th>
             </tr>
           </thead>
           <tbody>
@@ -193,12 +193,12 @@ function PerformanceTracer({ performanceData }) {
               const data = performanceData[subject];
               const accuracy = ((data.totalCorrect / data.totalQuestions) * 100).toFixed(1);
               return (
-                <tr key={subject}>
-                  <td className="py-1">{subject}</td>
-                  <td className="py-1">{data.quizzes}</td>
-                  <td className="py-1">{data.totalQuestions}</td>
-                  <td className="py-1">{data.totalCorrect}</td>
-                  <td className="py-1">{accuracy}%</td>
+                <tr key={subject} className="border-b border-gray-100">
+                  <td className="py-2">{subject}</td>
+                  <td className="py-2">{data.quizzes}</td>
+                  <td className="py-2">{data.totalQuestions}</td>
+                  <td className="py-2">{data.totalCorrect}</td>
+                  <td className="py-2">{accuracy}%</td>
                 </tr>
               );
             })}
@@ -232,7 +232,7 @@ export default function FinancePrepApp() {
     setPerformanceData(storedPerf);
   }, []);
 
-  // Local storage for streak and XP
+  // Load streak and XP from localStorage
   useEffect(() => {
     const lastLogin = localStorage.getItem('lastWorkoutDate');
     if (lastLogin !== today) {
@@ -338,13 +338,13 @@ export default function FinancePrepApp() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans">
       {/* Main Container */}
-      <div className="relative w-72 bg-white rounded-2xl shadow-md overflow-hidden flex-1">
+      <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
         {/* Header */}
-        <header className="flex items-center p-4 border-b border-gray-200">
+        <header className="flex items-center p-6 border-b border-gray-200">
           <div
-            className="w-12 h-12 flex items-center justify-center text-white"
+            className="w-14 h-14 flex items-center justify-center text-white"
             style={{
               backgroundColor: '#2D2E82',
               clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
@@ -352,20 +352,20 @@ export default function FinancePrepApp() {
           >
             💼
           </div>
-          <div className="ml-3">
-            <h1 className="text-xl font-bold">TechnicalPrep</h1>
-            <p className="text-xs text-gray-500">{streak} days streak · {xp} XP</p>
+          <div className="ml-4">
+            <h1 className="text-2xl font-bold text-gray-800">TechnicalPrep</h1>
+            <p className="text-sm text-gray-500">{streak} days streak • {xp} XP</p>
             <StreakDots />
           </div>
         </header>
 
         {/* Content Area */}
-        <div className="p-4 pb-12 flex-1 overflow-y-auto">
+        <div className="p-6 flex-1 overflow-y-auto">
           {activeTab === "Training" && (
             <>
               {/* Module Selection */}
-              {!selectedModule && !showWorkout && (
-                <div className="space-y-3">
+              {!selectedModule && (
+                <div className="space-y-4">
                   {modules.map((mod, i) => (
                     <div
                       key={i}
@@ -373,10 +373,10 @@ export default function FinancePrepApp() {
                         setSelectedModule(mod);
                         setQIndex(0);
                       }}
-                      className="flex items-center p-3 border border-gray-200 rounded-lg shadow-sm transition transform hover:scale-105 cursor-pointer"
+                      className="flex items-center p-4 border border-gray-200 rounded-lg shadow transition transform hover:scale-105 cursor-pointer bg-gray-50"
                     >
                       <div
-                        className="w-10 h-10 flex items-center justify-center text-white"
+                        className="w-12 h-12 flex items-center justify-center text-white rounded"
                         style={{
                           backgroundColor: mod.color.slice(4, -1),
                           clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
@@ -384,18 +384,18 @@ export default function FinancePrepApp() {
                       >
                         {mod.icon}
                       </div>
-                      <div className="ml-3">
-                        <h2 className="text-lg font-bold">{mod.name}</h2>
+                      <div className="ml-4">
+                        <h2 className="text-xl font-semibold text-gray-700">{mod.name}</h2>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
 
-              {/* Category Selection for subjects with categories */}
+              {/* Category Selection */}
               {selectedModule && hasCategories && !selectedCategory && (
                 <div className="space-y-4">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-2">Select Category</h2>
+                  <h2 className="text-xl font-semibold text-gray-700 mb-2">Select Category</h2>
                   {Object.keys(subjectQuestions).map((cat) => (
                     <button
                       key={cat}
@@ -403,25 +403,25 @@ export default function FinancePrepApp() {
                         setSelectedCategory(cat);
                         setQIndex(0);
                       }}
-                      className="w-full py-2 px-4 border border-gray-200 rounded-lg text-base font-medium text-gray-700 shadow-sm transition transform hover:scale-105"
+                      className="w-full py-3 px-4 border border-gray-200 rounded-lg text-lg font-medium text-gray-700 shadow transition transform hover:scale-105 bg-gray-50"
                     >
                       {cat}
                     </button>
                   ))}
-                  <button onClick={reset} className="mt-2 text-xs text-gray-500 underline">← Back to Home</button>
+                  <button onClick={reset} className="mt-2 text-sm text-gray-500 underline">← Back to Home</button>
                 </div>
               )}
 
               {/* Quiz Area */}
               {selectedModule && (!hasCategories || selectedCategory) && qIndex !== -1 && (
-                <div className="space-y-4 flex flex-col items-center justify-center">
-                  <div className="text-sm font-medium text-gray-500">
+                <div className="space-y-6 flex flex-col items-center justify-center">
+                  <div className="text-lg font-medium text-gray-600">
                     {selectedModule.name}{hasCategories && selectedCategory ? ` - ${selectedCategory}` : ''} · Question {qIndex + 1}/{currentQuiz.length}
                   </div>
-                  <div className="text-base font-semibold bg-gray-50 px-4 py-3 rounded-xl w-full text-center shadow-sm">
+                  <div className="text-lg font-semibold bg-gray-100 px-6 py-4 rounded-xl w-full text-center shadow">
                     {currentQ.question}
                   </div>
-                  <div className="space-y-3 w-full">
+                  <div className="space-y-4 w-full">
                     {currentQ.choices.map((choice, i) => {
                       let btnStyle = 'bg-white text-gray-900 hover:bg-gray-100';
                       if (showResult) {
@@ -437,7 +437,7 @@ export default function FinancePrepApp() {
                         <button
                           key={i}
                           onClick={() => handleChoice(i)}
-                          className={`w-full py-2 rounded-full text-base font-medium shadow-sm transition-all duration-200 ${btnStyle}`}
+                          className={`w-full py-3 rounded-full text-lg font-medium shadow transition duration-200 ${btnStyle}`}
                         >
                           {choice}
                         </button>
@@ -445,29 +445,28 @@ export default function FinancePrepApp() {
                     })}
                   </div>
                   {showResult && (
-                    <div className={`text-center text-base font-bold ${selectedChoice === currentQ.answer ? 'text-green-600' : 'text-red-600'}`}>
+                    <div className={`text-center text-lg font-bold ${selectedChoice === currentQ.answer ? 'text-green-600' : 'text-red-600'}`}>
                       {selectedChoice === currentQ.answer ? '✅ Correct!' : '❌ Incorrect'}
                     </div>
                   )}
                   {xpBoost && (
-                    <div className="text-center text-xs animate-bounce text-yellow-600">+10 XP!</div>
+                    <div className="text-center text-sm animate-bounce text-yellow-600">+10 XP!</div>
                   )}
-                  <button className="mt-4 underline text-xs text-gray-500" onClick={reset}>← Back to Home</button>
+                  <button className="mt-6 underline text-sm text-gray-500" onClick={reset}>← Back to Home</button>
                 </div>
               )}
 
               {/* Quiz Completion */}
               {selectedModule && (!hasCategories || selectedCategory) && qIndex === -1 && (
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-4xl font-bold mb-3">🎉</div>
-                  <h2 className="text-xl font-semibold mb-2">Workout Complete!</h2>
-                  <p className="text-sm mb-2">You got {score} out of {currentQuiz.length} correct</p>
-                  <p className="text-xs mb-2 text-gray-500">{streak} days streak · {xp} XP</p>
-                  {/* Record performance for subjects (except Daily Workout and Brain Teaser) */}
+                <div className="flex flex-col items-center justify-center text-center space-y-4">
+                  <div className="text-5xl font-bold text-gray-800">🎉</div>
+                  <h2 className="text-2xl font-semibold text-gray-700">Workout Complete!</h2>
+                  <p className="text-lg text-gray-600">You got {score} out of {currentQuiz.length} correct</p>
+                  <p className="text-sm text-gray-500">{streak} days streak • {xp} XP</p>
                   {selectedModule.name !== "Daily Workout" && selectedModule.name !== "Brain Teaser" && (
-                    <p className="text-xs text-gray-500">Your performance has been recorded.</p>
+                    <p className="text-sm text-gray-500">Your performance has been recorded.</p>
                   )}
-                  <button className="bg-gray-800 text-white font-semibold px-4 py-1 rounded-full shadow-sm" onClick={reset}>Back to Home</button>
+                  <button className="bg-gray-800 text-white font-semibold px-6 py-2 rounded-full shadow" onClick={reset}>Back to Home</button>
                 </div>
               )}
             </>
@@ -475,13 +474,13 @@ export default function FinancePrepApp() {
           {activeTab === "Performance" && (
             <PerformanceTracer performanceData={performanceData} />
           )}
-          {activeTab === "Study" && <div className="p-4">Study tab placeholder</div>}
-          {activeTab === "Notifications" && <div className="p-4">Notifications placeholder</div>}
-          {activeTab === "More" && <div className="p-4">More placeholder</div>}
+          {activeTab === "Study" && <div className="p-6 text-gray-600">Study tab placeholder</div>}
+          {activeTab === "Notifications" && <div className="p-6 text-gray-600">Notifications placeholder</div>}
+          {activeTab === "More" && <div className="p-6 text-gray-600">More placeholder</div>}
         </div>
 
         {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 w-full bg-white border-t border-gray-200 flex justify-around py-2">
+        <nav className="bg-white border-t border-gray-200 flex justify-around py-3">
           <NavItem icon="🏋️" label="Training" active={activeTab==="Training"} onClick={()=> setActiveTab("Training")} />
           <NavItem icon="📈" label="Performance" active={activeTab==="Performance"} onClick={()=> setActiveTab("Performance")} />
           <NavItem icon="📚" label="Study" active={activeTab==="Study"} onClick={()=> setActiveTab("Study")} />
@@ -496,8 +495,8 @@ export default function FinancePrepApp() {
 function NavItem({ icon, label, active, onClick }) {
   return (
     <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`text-xl ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
-      <span className={`text-xs ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
+      <span className={`text-2xl ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
+      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
     </div>
   );
 }
