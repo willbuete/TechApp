@@ -1,18 +1,57 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 
-// MODULES – Daily Workout is added at the top
-const modules = [
-  { name: 'Daily Workout', color: 'bg-[#FFA500]', icon: '🔥' },
-  { name: 'Accounting', color: 'bg-[#17848E]', icon: '🧾' },
-  { name: 'Valuation', color: 'bg-[#2D2E82]', icon: '📊' },
-  { name: 'Discounted Cash Flow', color: 'bg-[#FF5733]', icon: '💰' },
-  { name: 'M&A', color: 'bg-[#7D1E6A]', icon: '🤝' },
-  { name: 'LBO', color: 'bg-[#F4A300]', icon: '📉' },
-  { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: '🧩' }
+// Professional SVG Icons (from Heroicons or similar)
+// You can replace the SVG paths with your own icons if needed.
+function IconTraining() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
+    </svg>
+  );
+}
+function IconPerformance() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6h6v6m-3-9a4 4 0 110-8 4 4 0 010 8z" />
+    </svg>
+  );
+}
+function IconStudy() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01-.665 6.062L12 17l-5.495 2.64a12.083 12.083 0 01-.665-6.062L12 14z" />
+    </svg>
+  );
+}
+function IconNotifications() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    </svg>
+  );
+}
+function IconMore() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0zm6 0a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  );
+}
+
+// Replace module emojis with professional icons (you can replace these with your own SVGs)
+const modulesData = [
+  { name: 'Daily Workout', color: 'bg-[#FFA500]', icon: <IconTraining /> },
+  { name: 'Accounting', color: 'bg-[#17848E]', icon: <IconTraining /> },
+  { name: 'Valuation', color: 'bg-[#2D2E82]', icon: <IconTraining /> },
+  { name: 'Discounted Cash Flow', color: 'bg-[#FF5733]', icon: <IconTraining /> },
+  { name: 'M&A', color: 'bg-[#7D1E6A]', icon: <IconTraining /> },
+  { name: 'LBO', color: 'bg-[#F4A300]', icon: <IconTraining /> },
+  { name: 'Brain Teaser', color: 'bg-[#4CAF50]', icon: <IconTraining /> }
 ];
 
-// QUESTIONS OBJECT (same as before)
+// QUESTIONS OBJECT – (same as before; using your questions data)
 const questions = {
   Accounting: {
     Basic: [
@@ -174,7 +213,7 @@ function updateSubjectPerformance(subject, score, total, setPerformanceData) {
 function PerformanceTracer({ performanceData }) {
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Performance Tracker</h2>
+      <h2 className="text-2xl font-semibold mb-4 border-b border-gray-200 pb-2 text-gray-800">Performance Tracker</h2>
       {Object.keys(performanceData).length === 0 ? (
         <p className="text-gray-600">No performance data yet.</p>
       ) : (
@@ -194,11 +233,11 @@ function PerformanceTracer({ performanceData }) {
               const accuracy = ((data.totalCorrect / data.totalQuestions) * 100).toFixed(1);
               return (
                 <tr key={subject} className="border-b border-gray-100">
-                  <td className="py-2">{subject}</td>
-                  <td className="py-2">{data.quizzes}</td>
-                  <td className="py-2">{data.totalQuestions}</td>
-                  <td className="py-2">{data.totalCorrect}</td>
-                  <td className="py-2">{accuracy}%</td>
+                  <td className="py-2 text-gray-700">{subject}</td>
+                  <td className="py-2 text-gray-700">{data.quizzes}</td>
+                  <td className="py-2 text-gray-700">{data.totalQuestions}</td>
+                  <td className="py-2 text-gray-700">{data.totalCorrect}</td>
+                  <td className="py-2 text-gray-700">{accuracy}%</td>
                 </tr>
               );
             })}
@@ -340,40 +379,43 @@ export default function FinancePrepApp() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans">
       {/* Main Container */}
-      <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-md bg-white rounded-xl shadow-xl overflow-hidden flex flex-col">
         {/* Header */}
         <header className="flex items-center p-6 border-b border-gray-200">
           <div
-            className="w-14 h-14 flex items-center justify-center text-white"
+            className="w-14 h-14 flex items-center justify-center text-white rounded-full"
             style={{
               backgroundColor: '#2D2E82',
               clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
             }}
           >
-            💼
+            {/* Use a professional icon here (for example, a custom SVG or icon library) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
+            </svg>
           </div>
           <div className="ml-4">
-            <h1 className="text-2xl font-bold text-gray-800">TechnicalPrep</h1>
+            <h1 className="text-2xl text-gray-800">TechnicalPrep</h1>
             <p className="text-sm text-gray-500">{streak} days streak • {xp} XP</p>
             <StreakDots />
           </div>
         </header>
 
         {/* Content Area */}
-        <div className="p-6 flex-1 overflow-y-auto">
+        <div className="p-6 pb-12 flex-1 overflow-y-auto">
           {activeTab === "Training" && (
             <>
               {/* Module Selection */}
               {!selectedModule && (
-                <div className="space-y-4">
-                  {modules.map((mod, i) => (
+                <div className="space-y-6">
+                  {modulesData.map((mod, i) => (
                     <div
                       key={i}
                       onClick={() => {
                         setSelectedModule(mod);
                         setQIndex(0);
                       }}
-                      className="flex items-center p-4 border border-gray-200 rounded-lg shadow transition transform hover:scale-105 cursor-pointer bg-gray-50"
+                      className="flex items-center p-5 border border-gray-300 rounded-lg shadow-sm transition transform hover:scale-105 cursor-pointer bg-gray-50"
                     >
                       <div
                         className="w-12 h-12 flex items-center justify-center text-white rounded"
@@ -385,17 +427,17 @@ export default function FinancePrepApp() {
                         {mod.icon}
                       </div>
                       <div className="ml-4">
-                        <h2 className="text-xl font-semibold text-gray-700">{mod.name}</h2>
+                        <h2 className="text-xl text-gray-700">{mod.name}</h2>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
 
-              {/* Category Selection */}
+              {/* Category Selection for subjects with categories */}
               {selectedModule && hasCategories && !selectedCategory && (
-                <div className="space-y-4">
-                  <h2 className="text-xl font-semibold text-gray-700 mb-2">Select Category</h2>
+                <div className="space-y-6">
+                  <h2 className="text-xl text-gray-700 font-medium mb-4">Select Category</h2>
                   {Object.keys(subjectQuestions).map((cat) => (
                     <button
                       key={cat}
@@ -403,7 +445,7 @@ export default function FinancePrepApp() {
                         setSelectedCategory(cat);
                         setQIndex(0);
                       }}
-                      className="w-full py-3 px-4 border border-gray-200 rounded-lg text-lg font-medium text-gray-700 shadow transition transform hover:scale-105 bg-gray-50"
+                      className="w-full py-4 px-5 border border-gray-300 rounded-lg text-lg text-gray-700 shadow-sm transition transform hover:scale-105 bg-gray-50"
                     >
                       {cat}
                     </button>
@@ -414,30 +456,30 @@ export default function FinancePrepApp() {
 
               {/* Quiz Area */}
               {selectedModule && (!hasCategories || selectedCategory) && qIndex !== -1 && (
-                <div className="space-y-6 flex flex-col items-center justify-center">
-                  <div className="text-lg font-medium text-gray-600">
+                <div className="space-y-8 flex flex-col items-center justify-center">
+                  <div className="text-lg text-gray-600">
                     {selectedModule.name}{hasCategories && selectedCategory ? ` - ${selectedCategory}` : ''} · Question {qIndex + 1}/{currentQuiz.length}
                   </div>
-                  <div className="text-lg font-semibold bg-gray-100 px-6 py-4 rounded-xl w-full text-center shadow">
+                  <div className="text-lg bg-gray-100 px-6 py-4 rounded-lg w-full text-center shadow">
                     {currentQ.question}
                   </div>
                   <div className="space-y-4 w-full">
                     {currentQ.choices.map((choice, i) => {
-                      let btnStyle = 'bg-white text-gray-900 hover:bg-gray-100';
+                      let btnStyle = 'bg-white text-gray-800 hover:bg-gray-50';
                       if (showResult) {
                         if (i === currentQ.answer) {
-                          btnStyle = 'bg-green-300 text-gray-900';
+                          btnStyle = 'bg-green-200 text-gray-800';
                         } else if (selectedChoice === i) {
-                          btnStyle = 'bg-red-300 text-gray-900';
+                          btnStyle = 'bg-red-200 text-gray-800';
                         }
                       } else if (selectedChoice === i) {
-                        btnStyle = i === currentQ.answer ? 'bg-green-300 text-gray-900' : 'bg-red-300 text-gray-900';
+                        btnStyle = i === currentQ.answer ? 'bg-green-200 text-gray-800' : 'bg-red-200 text-gray-800';
                       }
                       return (
                         <button
                           key={i}
                           onClick={() => handleChoice(i)}
-                          className={`w-full py-3 rounded-full text-lg font-medium shadow transition duration-200 ${btnStyle}`}
+                          className={`w-full py-3 rounded-full text-lg transition duration-200 shadow-sm ${btnStyle}`}
                         >
                           {choice}
                         </button>
@@ -445,28 +487,28 @@ export default function FinancePrepApp() {
                     })}
                   </div>
                   {showResult && (
-                    <div className={`text-center text-lg font-bold ${selectedChoice === currentQ.answer ? 'text-green-600' : 'text-red-600'}`}>
-                      {selectedChoice === currentQ.answer ? '✅ Correct!' : '❌ Incorrect'}
+                    <div className={`text-center text-lg font-medium ${selectedChoice === currentQ.answer ? 'text-green-600' : 'text-red-600'}`}>
+                      {selectedChoice === currentQ.answer ? 'Correct!' : 'Incorrect'}
                     </div>
                   )}
                   {xpBoost && (
-                    <div className="text-center text-sm animate-bounce text-yellow-600">+10 XP!</div>
+                    <div className="text-center text-sm animate-bounce text-yellow-600">+10 XP</div>
                   )}
-                  <button className="mt-6 underline text-sm text-gray-500" onClick={reset}>← Back to Home</button>
+                  <button className="mt-6 text-sm text-gray-500 underline" onClick={reset}>← Back to Home</button>
                 </div>
               )}
 
               {/* Quiz Completion */}
               {selectedModule && (!hasCategories || selectedCategory) && qIndex === -1 && (
-                <div className="flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="text-5xl font-bold text-gray-800">🎉</div>
-                  <h2 className="text-2xl font-semibold text-gray-700">Workout Complete!</h2>
+                <div className="flex flex-col items-center justify-center text-center space-y-6">
+                  <div className="text-5xl text-gray-800">🎉</div>
+                  <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
                   <p className="text-lg text-gray-600">You got {score} out of {currentQuiz.length} correct</p>
                   <p className="text-sm text-gray-500">{streak} days streak • {xp} XP</p>
                   {selectedModule.name !== "Daily Workout" && selectedModule.name !== "Brain Teaser" && (
                     <p className="text-sm text-gray-500">Your performance has been recorded.</p>
                   )}
-                  <button className="bg-gray-800 text-white font-semibold px-6 py-2 rounded-full shadow" onClick={reset}>Back to Home</button>
+                  <button className="bg-gray-800 text-white text-lg px-6 py-2 rounded-full shadow" onClick={reset}>Back to Home</button>
                 </div>
               )}
             </>
@@ -480,12 +522,12 @@ export default function FinancePrepApp() {
         </div>
 
         {/* Bottom Navigation */}
-        <nav className="bg-white border-t border-gray-200 flex justify-around py-3">
-          <NavItem icon="🏋️" label="Training" active={activeTab==="Training"} onClick={()=> setActiveTab("Training")} />
-          <NavItem icon="📈" label="Performance" active={activeTab==="Performance"} onClick={()=> setActiveTab("Performance")} />
-          <NavItem icon="📚" label="Study" active={activeTab==="Study"} onClick={()=> setActiveTab("Study")} />
-          <NavItem icon="🔔" label="Notifications" active={activeTab==="Notifications"} onClick={()=> setActiveTab("Notifications")} />
-          <NavItem icon="⋯" label="More" active={activeTab==="More"} onClick={()=> setActiveTab("More")} />
+        <nav className="bg-white border-t border-gray-200 flex justify-around py-4">
+          <NavItem icon={<IconTraining />} label="Training" active={activeTab==="Training"} onClick={()=> setActiveTab("Training")} />
+          <NavItem icon={<IconPerformance />} label="Performance" active={activeTab==="Performance"} onClick={()=> setActiveTab("Performance")} />
+          <NavItem icon={<IconStudy />} label="Study" active={activeTab==="Study"} onClick={()=> setActiveTab("Study")} />
+          <NavItem icon={<IconNotifications />} label="Notifications" active={activeTab==="Notifications"} onClick={()=> setActiveTab("Notifications")} />
+          <NavItem icon={<IconMore />} label="More" active={activeTab==="More"} onClick={()=> setActiveTab("More")} />
         </nav>
       </div>
     </div>
@@ -495,7 +537,7 @@ export default function FinancePrepApp() {
 function NavItem({ icon, label, active, onClick }) {
   return (
     <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`text-2xl ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
+      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
       <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
     </div>
   );
