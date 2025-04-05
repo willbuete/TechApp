@@ -79,28 +79,35 @@ function IconMore() {
   );
 }
 
+// ---------- Modules Data ---------- //
+const modulesData = [
+  { id: 1, title: "Valuation Drill", icon: <IconValuation />, estimatedTime: "2 mins", color: "bg-blue-100" },
+  { id: 2, title: "Accounting Review", icon: <IconAccounting />, estimatedTime: "3 mins", color: "bg-green-100" },
+  { id: 3, title: "Markets Challenge", icon: <IconDailyWorkout />, estimatedTime: "2 mins", color: "bg-orange-100" }
+];
+
 // ---------- Full Questions Data ---------- //
 const questionsData = {
   Accounting: {
     Basic: [
-      { question: "Which of the following correctly lists the three major financial statements?", choices: ["Income Statement, Cash Flow Statement, Equity Statement", "Balance Sheet, Cash Flow Statement, Statement of Capital", "Income Statement, Balance Sheet, Cash Flow Statement", "Income Statement, Profit & Loss Statement, Balance Sheet"], answer: 2 },
+      { question: "Which of the following correctly lists the three major financial statements?", choices: ["Income Statement, Cash Flow Statement, Equity Statement", "Balance Sheet, Cash Flow Statement, Statement of Capital", "Income Statement, Balance Sheet, Cash Flow Statement", "Income Statement, Profit &amp; Loss Statement, Balance Sheet"], answer: 2 },
       { question: "Which of these is NOT a line item on an Income Statement?", choices: ["Cost of Goods Sold", "Inventory", "Revenue", "Net Income"], answer: 1 },
       { question: "On which statement does Net Income directly appear as the starting point?", choices: ["Balance Sheet", "Cash Flow Statement", "Equity Statement", "Statement of Capital"], answer: 1 },
-      { question: "If you could only use one financial statement to assess a company’s health, which should it be and why?", choices: ["Income Statement, because it shows net profit.", "Balance Sheet, because it lists all assets and liabilities.", "Cash Flow Statement, because it shows actual cash generated.", "Equity Statement, because it details ownership changes."], answer: 2 },
+      { question: "If you could only use one financial statement to assess a company&apos;s health, which should it be and why?", choices: ["Income Statement, because it shows net profit.", "Balance Sheet, because it lists all assets and liabilities.", "Cash Flow Statement, because it shows actual cash generated.", "Equity Statement, because it details ownership changes."], answer: 2 },
       { question: "Depreciation increasing by $10 affects the Income Statement by:", choices: ["Decreasing Operating Income by $10", "Increasing Net Income by $10", "Decreasing Operating Income by $4", "Increasing Operating Income by $6"], answer: 0 },
-      { question: "An increase in Accrued Compensation by $10 results in:", choices: ["Cash Flow from Operations increasing by $10", "Assets decreasing by $4", "Net Income increasing by $6", "Shareholders' Equity increasing by $10"], answer: 0 },
+      { question: "An increase in Accrued Compensation by $10 results in:", choices: ["Cash Flow from Operations increasing by $10", "Assets decreasing by $4", "Net Income increasing by $6", "Shareholders&apos; Equity increasing by $10"], answer: 0 },
       { question: "If Inventory goes up by $10 (paid with cash), what happens to cash flow?", choices: ["Increases by $10", "Decreases by $10", "No change", "Decreases by $6"], answer: 1 },
-      { question: "When Apple buys $100 of factories with debt at the start of Year 1, what changes immediately?", choices: ["Cash decreases by $100", "Debt decreases by $100", "PP&E increases by $100", "Net Income decreases by $100"], answer: 2 },
+      { question: "When Apple buys $100 of factories with debt at the start of Year 1, what changes immediately?", choices: ["Cash decreases by $100", "Debt decreases by $100", "PP&amp;E increases by $100", "Net Income decreases by $100"], answer: 2 },
       { question: "After one year with 10% depreciation and interest on $100 debt, assuming a 40% tax rate, Net Income decreases by:", choices: ["$10", "$20", "$12", "$8"], answer: 2 },
-      { question: "Negative shareholders’ equity might indicate:", choices: ["Immediate bankruptcy", "Consistent losses or dividend recapitalizations", "Increase in cash flow", "Higher profitability"], answer: 1 }
+      { question: "Negative shareholders&apos; equity might indicate:", choices: ["Immediate bankruptcy", "Consistent losses or dividend recapitalizations", "Increase in cash flow", "Higher profitability"], answer: 1 }
     ],
     Advanced: [
       { question: "GAAP accounting differs from tax accounting primarily because:", choices: ["GAAP is cash-based and tax accounting is accrual-based.", "GAAP uses accelerated depreciation methods, while tax accounting uses straight-line.", "GAAP is accrual-based and tax accounting is cash-based.", "Tax accounting more accurately tracks long-term liabilities."], answer: 2 },
-      { question: "Deferred Tax Liabilities typically arise when:", choices: ["You have already paid taxes in cash but haven't expensed them yet.", "There are temporary differences causing taxes expensed but not yet paid.", "You pay fewer taxes due to immediate cash payments.", "Asset values are written down during M&A transactions."], answer: 1 },
+      { question: "Deferred Tax Liabilities typically arise when:", choices: ["You have already paid taxes in cash but haven&apos;t expensed them yet.", "There are temporary differences causing taxes expensed but not yet paid.", "You pay fewer taxes due to immediate cash payments.", "Asset values are written down during M&amp;A transactions."], answer: 1 },
       { question: "When creating a revenue model, the more reliable method generally considered is:", choices: ["Top-down approach", "Market-driven approach", "Bottom-up approach", "Competitor-based approach"], answer: 2 },
       { question: "A bottom-up expense model typically starts with:", choices: ["Overall revenue projections.", "Number of departments and employees.", "Cost of capital expenditures.", "Future market trends."], answer: 1 },
-      { question: "What is NOT commonly included in Shareholders' Equity?", choices: ["Retained Earnings", "Common Stock", "Treasury Stock", "Interest Payable"], answer: 3 },
-      { question: "Retained Earnings is calculated as:", choices: ["Revenue – Expenses + Dividends", "Last year's balance + Net Income – Dividends", "Common stock + Additional Paid-in Capital", "Net Income + Dividends"], answer: 1 },
+      { question: "What is NOT commonly included in Shareholders&apos; Equity?", choices: ["Retained Earnings", "Common Stock", "Treasury Stock", "Interest Payable"], answer: 3 },
+      { question: "Retained Earnings is calculated as:", choices: ["Revenue – Expenses + Dividends", "Last year&apos;s balance + Net Income – Dividends", "Common stock + Additional Paid-in Capital", "Net Income + Dividends"], answer: 1 },
       { question: "What would increase Additional Paid-In Capital (APIC)?", choices: ["Dividend Payments", "Treasury stock repurchases", "Stock-based compensation and option exercises", "Depreciation of assets"], answer: 2 },
       { question: "An example of a non-recurring charge that should be added back to EBITDA is:", choices: ["Depreciation", "Stock-based compensation", "Restructuring charges", "Regular annual bonuses"], answer: 2 },
       { question: "To project Accounts Receivable in a financial model, one typically uses:", choices: ["% of Revenue", "% of Operating Expenses", "% of Cost of Goods Sold", "% of Capital Expenditures"], answer: 0 },
@@ -114,22 +121,22 @@ const questionsData = {
       { question: "You subtract cash in calculating Enterprise Value because:", choices: ["It reduces the price an acquirer effectively pays.", "Cash represents future revenue.", "Debt is always greater than cash.", "Cash increases liabilities."], answer: 0 },
       { question: "Which of the following securities uses the Treasury Stock Method when calculating diluted shares?", choices: ["Convertible bonds", "Preferred Stock", "Warrants and options", "Debt"], answer: 2 },
       { question: "What could result in a negative Enterprise Value?", choices: ["Extremely low debt levels", "High equity valuation", "Extremely high cash balances", "High preferred stock values"], answer: 2 },
-      { question: "Why do we add Preferred Stock to Enterprise Value?", choices: ["It's more similar to common stock.", "It pays fixed dividends and is similar to debt.", "It lowers total Enterprise Value.", "It's a mandatory cash balance."], answer: 1 },
+      { question: "Why do we add Preferred Stock to Enterprise Value?", choices: ["It&apos;s more similar to common stock.", "It pays fixed dividends and is similar to debt.", "It lowers total Enterprise Value.", "It&apos;s a mandatory cash balance."], answer: 1 },
       { question: "Convertible bonds are treated as debt when:", choices: ["Their conversion price is below the current share price.", "Their conversion price is equal to the current share price.", "Their conversion price is above the current share price.", "The bonds are newly issued."], answer: 2 },
-      { question: "Shareholders’ Equity is different from Equity Value because:", choices: ["Shareholders' Equity represents market value.", "Equity Value reflects book value.", "Shareholders' Equity is a market valuation metric.", "Equity Value represents market value; Shareholders’ Equity represents book value."], answer: 3 },
+      { question: "Shareholders&apos; Equity is different from Equity Value because:", choices: ["Shareholders&apos; Equity represents market value.", "Equity Value reflects book value.", "Shareholders&apos; Equity is a market valuation metric.", "Equity Value represents market value; Shareholders&apos; Equity represents book value."], answer: 3 },
       { question: "A higher dilution percentage in Equity Value calculations (greater than 10%) is considered:", choices: ["Typical and expected", "Unusual and may require additional review", "Impossible", "Beneficial to shareholders"], answer: 1 },
-      { question: "When valuing a company for acquisition, analysts primarily consider:", choices: ["Equity Value, since it reflects market value.", "Enterprise Value, as it includes debt repayment obligations.", "Shareholders' Equity, for accounting accuracy.", "Market capitalization alone."], answer: 1 }
+      { question: "When valuing a company for acquisition, analysts primarily consider:", choices: ["Equity Value, since it reflects market value.", "Enterprise Value, as it includes debt repayment obligations.", "Shareholders&apos; Equity, for accounting accuracy.", "Market capitalization alone."], answer: 1 }
     ],
     Advanced: [
       { question: "When valuing banks and financial institutions, analysts typically use:", choices: ["EV/EBITDA multiples", "Dividend Discount Models (DDM) and P/E multiples", "Price-to-sales ratios", "Standard DCF models"], answer: 1 },
       { question: "The correct formula for calendarizing financial statements to Trailing Twelve Months (TTM) is:", choices: ["TTM = Most Recent Quarter - Old Partial Period", "TTM = Most Recent Fiscal Year + New Partial Period – Old Partial Period", "TTM = Most Recent Fiscal Year + Most Recent Quarter", "TTM = Old Partial Period + New Partial Period"], answer: 1 },
       { question: "What is unique about IPO valuations compared to standard valuations?", choices: ["They always use precedent transactions.", "Only public company comparables are typically used.", "They rely primarily on DCF analysis.", "IPO proceeds are ignored."], answer: 1 },
-      { question: "An M&A premiums analysis specifically requires that the sellers must be:", choices: ["Private companies", "Public companies", "International companies", "Subsidiaries of larger corporations"], answer: 1 },
+      { question: "An M&amp;A premiums analysis specifically requires that the sellers must be:", choices: ["Private companies", "Public companies", "International companies", "Subsidiaries of larger corporations"], answer: 1 },
       { question: "Future share price analysis involves:", choices: ["Projecting dividends and discounting them to present value.", "Using historical P/E multiples on projected EPS and discounting to present value.", "Using EV/EBITDA multiples exclusively.", "Valuing only private companies."], answer: 1 },
       { question: "A Sum-of-the-Parts (SOTP) analysis is most useful when a company:", choices: ["Has a single major revenue stream", "Operates in one geographic location", "Has multiple, diverse business units", "Is newly formed and private"], answer: 2 },
       { question: "In valuations, Net Operating Losses (NOLs) are typically:", choices: ["Added directly to Enterprise Value", "Valued based on future tax savings and discounted to present value", "Completely ignored", "Considered as part of debt obligations"], answer: 1 },
       { question: "How do you handle missing EBITDA figures in precedent transactions?", choices: ["Only use transactions with complete financial data.", "Estimate from press releases, equity research, or financial databases.", "Omit EBITDA from analysis entirely.", "Substitute EBIT for EBITDA."], answer: 1 },
-      { question: "Which of the following multiples would you primarily use to value an oil & gas company?", choices: ["EV / Revenue", "P / MCFE and P / NAV", "Price-to-Earnings", "EV / EBITDA"], answer: 1 },
+      { question: "Which of the following multiples would you primarily use to value an oil &amp; gas company?", choices: ["EV / Revenue", "P / MCFE and P / NAV", "Price-to-Earnings", "EV / EBITDA"], answer: 1 },
       { question: "For valuing a Real Estate Investment Trust (REIT), analysts typically use:", choices: ["Price / FFO and NAV", "EV / EBITDA exclusively", "Price-to-Sales", "Dividend Discount Model (DDM)"], answer: 0 }
     ]
   },
@@ -142,7 +149,7 @@ const questionsData = {
       { question: "Unlevering and re-levering Beta is necessary because:", choices: ["It simplifies the DCF calculation.", "Each company has a different capital structure, affecting Beta.", "Levered Beta is irrelevant to Cost of Equity.", "It removes all market risk."], answer: 1 },
       { question: "Levered Free Cash Flow provides valuation for:", choices: ["Enterprise Value", "Debt Holders Only", "Equity Value", "Preferred Stock Holders Only"], answer: 2 },
       { question: "Which method is generally preferred for calculating Terminal Value in banking?", choices: ["Gordon Growth Model", "Multiples Method", "Dividend Discount Model", "Cost of Equity Method"], answer: 1 },
-      { question: "In calculating Terminal Value using Gordon Growth, an appropriate growth rate typically would be:", choices: ["Significantly higher than GDP growth", "Equivalent to historical stock market returns", "The country’s long-term GDP growth or inflation rate", "Zero percent"], answer: 2 },
+      { question: "In calculating Terminal Value using Gordon Growth, an appropriate growth rate typically would be:", choices: ["Significantly higher than GDP growth", "Equivalent to historical stock market returns", "The country&apos;s long-term GDP growth or inflation rate", "Zero percent"], answer: 2 },
       { question: "Which change typically has the larger impact on a DCF valuation?", choices: ["10% change in projected revenue", "1% change in discount rate", "1% increase in tax rate", "5% increase in depreciation"], answer: 0 },
       { question: "Dividend yield is already reflected in:", choices: ["WACC calculation", "Beta within the CAPM formula", "Terminal value calculation", "Risk-free rate"], answer: 1 }
     ],
@@ -150,7 +157,7 @@ const questionsData = {
       { question: "Why is the mid-year convention used in a DCF?", choices: ["To simplify calculations", "Because cash flows arrive evenly throughout the year", "To inflate valuations artificially", "To ignore discounting completely"], answer: 1 },
       { question: "With the mid-year convention, the discount period for Year 2 cash flow is:", choices: ["0.5", "1", "1.5", "2"], answer: 2 },
       { question: "When using mid-year convention, how does the discount period change for Terminal Value calculated using the Multiples Method?", choices: ["It remains the same", "You subtract 0.5 from the final year", "You add 0.5 to the final year", "You double the final year"], answer: 2 },
-      { question: "How is a public company's per-share value calculated after determining Enterprise Value in a DCF?", choices: ["Subtract debt and cash from Enterprise Value, ignoring dilution", "Add cash, subtract debt, preferred stock, minority interest, and calculate dilution iteratively", "Use Enterprise Value divided by basic shares outstanding directly", "Only subtract debt from Enterprise Value"], answer: 1 },
+      { question: "How is a public company&apos;s per-share value calculated after determining Enterprise Value in a DCF?", choices: ["Subtract debt and cash from Enterprise Value, ignoring dilution", "Add cash, subtract debt, preferred stock, minority interest, and calculate dilution iteratively", "Use Enterprise Value divided by basic shares outstanding directly", "Only subtract debt from Enterprise Value"], answer: 1 },
       { question: "In a Dividend Discount Model (DDM), the discount rate typically used is:", choices: ["WACC", "Cost of Debt", "Cost of Equity", "Risk-Free Rate"], answer: 2 },
       { question: "Convertible debt should be considered equity (rather than debt) in WACC calculations when:", choices: ["It is out-of-the-money", "It has recently been issued", "It is in-the-money", "The company has high overall debt"], answer: 2 },
       { question: "If a company plans significant CapEx in Year 4, how does this affect the DCF valuation?", choices: ["No effect on Enterprise Value", "Enterprise Value increases immediately", "Enterprise Value decreases by the present value of the CapEx", "Enterprise Value doubles"], answer: 2 },
@@ -165,68 +172,45 @@ const questionsData = {
       { question: "In a merger, typically the buyer and seller:", choices: ["Are drastically different sizes", "Are similar in size", "Must both be private companies", "Always have different industries"], answer: 1 },
       { question: "Which of these is NOT a typical reason for an acquisition?", choices: ["To acquire critical technology or IP", "To gain market share", "To decrease revenue and increase expenses", "To acquire new customers"], answer: 2 },
       { question: "An acquisition is dilutive when:", choices: ["The seller’s net income outweighs the costs of financing", "The buyer issues fewer shares than expected", "Additional net income from the seller does not offset acquisition costs", "The seller has higher EBITDA margins than the buyer"], answer: 2 },
-      { question: "Which is true for an all-stock deal regarding accretion and dilution?", choices: ["If the buyer's P/E is lower than the seller's, it's accretive.", "If the buyer’s P/E is higher than the seller's, it's accretive.", "P/E ratios don't matter for stock deals.", "Accretion or dilution is unaffected by P/E ratios."], answer: 1 },
-      { question: "Which of the following are typical acquisition effects?", choices: ["Decreased interest payments", "Fewer shares outstanding", "Creation of Goodwill & Other Intangibles", "Decreased debt"], answer: 2 },
+      { question: "Which is true for an all-stock deal regarding accretion and dilution?", choices: ["If the buyer&apos;s P/E is lower than the seller&apos;s, it&apos;s accretive.", "If the buyer&apos;s P/E is higher than the seller&apos;s, it&apos;s accretive.", "P/E ratios don&apos;t matter for stock deals.", "Accretion or dilution is unaffected by P/E ratios."], answer: 1 },
+      { question: "Which of the following are typical acquisition effects?", choices: ["Decreased interest payments", "Fewer shares outstanding", "Creation of Goodwill &amp; Other Intangibles", "Decreased debt"], answer: 2 },
       { question: "Why might a company with ample cash still choose not to pay cash in an acquisition?", choices: ["Cash always increases the transaction cost", "Debt financing is always cheaper", "To preserve liquidity for future uncertainty", "To increase immediate tax liabilities"], answer: 2 },
       { question: "Strategic acquirers typically pay more than private equity firms due to:", choices: ["Lower valuations required by shareholders", "Lack of competitive pressure", "Ability to realize revenue and cost synergies", "Preference for cash transactions"], answer: 2 },
       { question: "The primary difference between Goodwill and Other Intangible Assets is that:", choices: ["Goodwill is amortized, Other Intangibles are not", "Goodwill remains stable unless impaired; Other Intangibles are amortized", "Both are amortized over the same period", "Goodwill always represents physical assets"], answer: 1 },
       { question: "Which type of synergy is typically considered more realistic in mergers and acquisitions?", choices: ["Revenue synergies", "Cost synergies", "Technological synergies", "Geographic synergies"], answer: 1 }
     ],
     Advanced: [
-      { question: "In an M&A deal using purchase accounting:", choices: ["Shareholders' equity numbers combine directly", "The seller's equity is wiped out and Goodwill is recorded", "Only tangible assets combine", "Intangible assets are ignored"], answer: 1 },
+      { question: "In an M&amp;A deal using purchase accounting:", choices: ["Shareholders&apos; equity numbers combine directly", "The seller&apos;s equity is wiped out and Goodwill is recorded", "Only tangible assets combine", "Intangible assets are ignored"], answer: 1 },
       { question: "Revenue synergies are typically calculated by:", choices: ["Estimating incremental revenue from improved business performance", "Multiplying the total number of employees by average salary", "Ignoring potential future benefits completely", "Reducing costs related to redundant processes"], answer: 0 },
-      { question: "Allowable NOL usage in an acquisition under Section 382 is calculated as:", choices: ["Seller’s NOL balance multiplied by tax rate", "Seller’s total assets divided by purchase price", "Equity Purchase Price multiplied by the highest past 3-month adjusted long-term rate", "Debt issued multiplied by tax rate"], answer: 2 },
-      { question: "Deferred Tax Liabilities (DTLs) in M&A deals are created when:", choices: ["Assets are written down", "Assets are written up", "NOLs are fully used", "Debt is repaid"], answer: 1 },
+      { question: "Allowable NOL usage in an acquisition under Section 382 is calculated as:", choices: ["Seller&apos;s NOL balance multiplied by tax rate", "Seller&apos;s total assets divided by purchase price", "Equity Purchase Price multiplied by the highest past 3-month adjusted long-term rate", "Debt issued multiplied by tax rate"], answer: 2 },
+      { question: "Deferred Tax Liabilities (DTLs) in an M&amp;A deal are created when:", choices: ["Assets are written down", "Assets are written up", "NOLs are fully used", "Debt is repaid"], answer: 1 },
       { question: "What happens to Deferred Tax Assets (DTAs) and Deferred Tax Liabilities (DTLs) in an asset purchase?", choices: ["Both are significantly increased", "Neither are created, since book and tax bases align", "DTLs increase, DTAs decrease", "DTAs increase, DTLs decrease"], answer: 1 },
-      { question: "The complete formula for calculating Goodwill in an M&A deal is:", choices: ["Equity Purchase Price – Seller Book Value", "Equity Purchase Price + Seller Book Value + Existing Goodwill", "Equity Purchase Price – Seller Book Value + Existing Goodwill – Asset Write-Ups – Existing DTL + DTA Write-Down + New DTL", "Purchase Price – Debt"], answer: 2 },
-      { question: "Section 338(h)(10) elections in M&A deals are advantageous because they:", choices: ["Avoid taxation completely for the seller", "Provide the buyer with a step-up tax basis for depreciating assets", "Treat the transaction purely as stock for accounting purposes", "Eliminate all goodwill"], answer: 1 },
-      { question: "An exchange ratio in an all-stock M&A deal defines:", choices: ["A fixed dollar amount the seller receives", "The number of buyer’s shares the seller receives per share owned", "The total cash value exchanged in the transaction", "The debt issued by the buyer"], answer: 1 },
-      { question: "An Earnout in M&A transactions primarily serves to:", choices: ["Immediately reduce the purchase price", "Guarantee future revenue synergies", "Incentivize sellers to achieve future financial goals", "Transfer tax liabilities to the buyer"], answer: 2 },
+      { question: "The complete formula for calculating Goodwill in an M&amp;A deal is:", choices: ["Equity Purchase Price – Seller Book Value", "Equity Purchase Price + Seller Book Value + Existing Goodwill", "Equity Purchase Price – Seller Book Value + Existing Goodwill – Asset Write-Ups – Existing DTL + DTA Write-Down + New DTL", "Purchase Price – Debt"], answer: 2 },
+      { question: "Section 338(h)(10) elections in an M&amp;A deal are advantageous because they:", choices: ["Avoid taxation completely for the seller", "Provide the buyer with a step-up tax basis for depreciating assets", "Treat the transaction purely as stock for accounting purposes", "Eliminate all goodwill"], answer: 1 },
+      { question: "An exchange ratio in an all-stock M&amp;A deal defines:", choices: ["A fixed dollar amount the seller receives", "The number of buyer&apos;s shares the seller receives per share owned", "The total cash value exchanged in the transaction", "The debt issued by the buyer"], answer: 1 },
+      { question: "An Earnout in M&amp;A transactions primarily serves to:", choices: ["Immediately reduce the purchase price", "Guarantee future revenue synergies", "Incentivize sellers to achieve future financial goals", "Transfer tax liabilities to the buyer"], answer: 2 },
       { question: "In accounting for transaction and financing fees under current rules:", choices: ["Both are fully capitalized and amortized", "Transaction fees are expensed immediately; financing fees are capitalized and amortized", "Both are expensed immediately", "Both are ignored"], answer: 1 }
     ]
-  },
-  LBO: {
-    Basic: [
-      { question: "What is the first step in an LBO model?", choices: ["Calculate interest payments", "Adjust balance sheet items", "Make assumptions about Purchase Price, Debt/Equity, and Interest Rate", "Determine the exit strategy"], answer: 2 },
-      { question: "The primary reason a private equity firm uses leverage (debt) in an LBO is to:", choices: ["Reduce operational risk", "Boost returns by reducing equity contribution", "Increase cash holdings", "Avoid taxation"], answer: 1 },
-      { question: "Which variables typically impact LBO returns the most?", choices: ["Capital expenditure levels", "Purchase and exit multiples", "Revenue growth alone", "Operating margin alone"], answer: 1 },
-      { question: "An ideal candidate for an LBO would typically have:", choices: ["Highly cyclical revenue streams", "High ongoing capital expenditures", "Stable and predictable cash flows", "High operational risks"], answer: 2 },
-      { question: "An LBO model sets the \"floor valuation\" because:", choices: ["It always produces the highest valuation", "It calculates the maximum strategic value", "PE firms typically pay less than strategic buyers", "It ignores cash flow projections"], answer: 2 },
-      { question: "Goodwill and Other Intangible Assets in an LBO primarily serve as:", choices: ["Assets to be depreciated immediately", "Liabilities on the Balance Sheet", "A plug to balance the adjustments in the Balance Sheet", "Additional cash flow"], answer: 2 },
-      { question: "Why might a PE firm prefer debt financing even if it seems more expensive than cash financing?", choices: ["Debt is owned by the PE firm, increasing their control", "Debt increases taxation significantly", "Debt allows them to use less of their own capital upfront", "Debt immediately improves the target’s credit rating"], answer: 2 },
-      { question: "Which statement about debt used in LBOs is correct?", choices: ["High-yield debt has lower interest rates than bank debt.", "Bank debt usually has fixed interest rates.", "High-yield debt often has incurrence covenants.", "Bank debt principal is always paid entirely at the end."], answer: 2 },
-      { question: "A dividend recapitalization is best described as:", choices: ["A company buying back shares with cash", "Issuing new debt specifically to pay dividends to PE investors", "Reducing dividends to reinvest in business growth", "Refinancing existing debt without dividend distributions"], answer: 1 },
-      { question: "How does a dividend recapitalization impact financial statements in an LBO?", choices: ["Decreases net income immediately", "Increases both cash flow and net income", "Increases debt, reduces shareholders' equity, no net cash change", "Increases cash from operations"], answer: 2 }
-    ],
-    Advanced: [
-      { question: "In terms of seniority in a bankruptcy scenario, which debt holder typically gets paid first?", choices: ["Senior unsecured", "Senior secured", "Senior subordinated", "Equity investors"], answer: 1 },
-      { question: "\"Floating\" interest rates in LBO debt are usually tied to:", choices: ["LIBOR", "Prime rate", "Fixed at issuance", "U.S. Treasury rate"], answer: 0 },
-      { question: "How does Payment In Kind (PIK) debt typically affect the financial statements?", choices: ["Interest is paid in cash and reduces EBITDA", "Interest accrues to the principal; interest expense is non-cash", "No interest expense is recognized", "Principal repayments begin immediately"], answer: 1 },
-      { question: "Which of these is an example of a maintenance covenant?", choices: ["Company cannot take on more than $2 billion of total debt", "EBITDA / Interest Expense cannot fall below 5.0x", "Proceeds from asset sales must repay debt", "Company cannot acquire assets above $200 million"], answer: 1 },
-      { question: "Section 338(h)(10) elections in an LBO are typically not possible because:", choices: ["The buyer must be an LLC", "The buyer must be a C corporation, and PE firms often use LLCs", "The seller must be a private company", "The purchase must be all-stock"], answer: 1 },
-      { question: "How do you typically calculate IRR for debt investors in an LBO?", choices: ["Only initial principal repayment matters", "Consider both principal and interest payments as cash flows", "Only interest payments are included", "Debt IRR is always fixed and not calculated"], answer: 1 },
-      { question: "A revolver in an LBO model is typically used when:", choices: ["The cash required for mandatory debt repayments exceeds available cash flow", "Optional debt repayments are too high", "Interest payments are too low", "Cash flow exceeds mandatory repayments significantly"], answer: 0 },
-      { question: "In an LBO model, management equity option pools are primarily used to:", choices: ["Reduce the purchase price", "Decrease interest expenses", "Incentivize management performance", "Increase leverage"], answer: 2 },
-      { question: "Which adjustment on the Income Statement in an LBO model typically impacts Pre-Tax Income directly?", choices: ["Depreciation from PP&E write-ups", "Amortization from capitalized financing fees", "Interest Expense on LBO Debt", "Cost Savings from layoffs"], answer: 2 },
-      { question: "Increasing leverage in an LBO can occasionally reduce IRR if:", choices: ["The purchase multiple is very low", "Cash flow growth is very high", "Interest and principal repayments become excessively high relative to cash flow", "Exit multiples significantly increase"], answer: 2 }
-    ]
-  },
-  "Brain Teaser": [
-    { question: "A car drives 60 miles at an average speed of 30 miles per hour. To travel the same 60 miles in the same amount of time at an average speed of 60 mph, how fast must the car drive?", choices: ["90 mph", "120 mph", "It&apos;s impossible", "60 mph"], answer: 2 },
-    { question: "What is the angle formed by the hands of a clock at 1:45?", choices: ["120 degrees", "142.5 degrees", "135 degrees", "90 degrees"], answer: 1 },
-    { question: "What is the greatest dollar value in coins you can hold without being able to make change for exactly $1.00 using quarters, dimes, nickels, and pennies?", choices: ["$1.25", "$1.19", "$0.99", "$1.24"], answer: 1 },
-    { question: "Using a 3-liter bucket and a 5-liter bucket, how do you measure exactly 4 liters of water?", choices: ["Fill the 3-liter bucket twice", "Fill the 5-liter bucket halfway", "Fill the 3-liter bucket, transfer to the 5-liter bucket, refill the 3-liter bucket, and transfer until the 5-liter bucket is full, leaving 1 liter in the 3-liter bucket. Empty the 5-liter bucket, transfer the remaining 1 liter, then refill the 3-liter bucket and add it to the 5-liter bucket.", "It&apos;s impossible with these buckets"], answer: 2 }
-  ]
+  }
 };
 
 // ---------- Daily Workout Aggregation ---------- //
-// For Daily Workout, we aggregate 4 random Basic questions from each subject (excluding Brain Teaser)
 const dailyWorkoutSubjects = ["Accounting", "Valuation", "Discounted Cash Flow", "M&A", "LBO"];
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+// Note: For aggregation we create a helper function.
+function getAggregatedDailyWorkout() {
+  let agg = [];
+  dailyWorkoutSubjects.forEach((sub) => {
+    const subData = questionsData[sub];
+    if (subData && subData.Basic && subData.Basic.length >= 4) {
+      const shuffled = [...subData.Basic].sort(() => Math.random() - 0.5);
+      agg = agg.concat(shuffled.slice(0, 4));
+    }
+  });
+  return [...agg].sort(() => Math.random() - 0.5);
 }
+const aggregatedDailyWorkout = useMemo(() => getAggregatedDailyWorkout(), []);
 
-// ---------- Performance Tracking (dummy implementation) ---------- //
+// ---------- Performance Tracking ---------- //
 function updateSubjectPerformance(subject, score, total, setPerformanceData) {
   let perf = JSON.parse(localStorage.getItem("subjectPerformance") || "{}");
   if (!perf[subject]) {
@@ -277,7 +261,7 @@ function PerformanceTracker({ performanceData }) {
   );
 }
 
-// ---------- News Screen Component (Finance News Only) ---------- //
+// ---------- News Screen (Finance News Only) ---------- //
 function NewsScreen() {
   const [headlines, setHeadlines] = useState([]);
   const [error, setError] = useState(null);
@@ -325,7 +309,7 @@ function NewsScreen() {
   );
 }
 
-// ---------- More Screen Component (Internship Tracker Placeholder) ---------- //
+// ---------- More Screen (Internship Tracker Placeholder) ---------- //
 function MoreScreen() {
   return (
     <div className="p-6 text-gray-600 space-y-6">
@@ -356,35 +340,21 @@ export default function FinancePrepApp() {
   const [screen, setScreen] = useState("home"); // "home" or "quiz"
   const [performanceData, setPerformanceData] = useState({});
 
-  // For Daily Workout, aggregate 4 random Basic questions from each subject (excluding Brain Teaser)
-  const aggregatedDailyWorkout = useMemo(() => {
-    let agg = [];
-    dailyWorkoutSubjects.forEach((sub) => {
-      const subData = questionsData[sub];
-      if (subData && subData.Basic && subData.Basic.length >= 4) {
-        const shuffled = shuffleArray([...subData.Basic]);
-        agg = agg.concat(shuffled.slice(0, 4));
-      }
-    });
-    return shuffleArray(agg);
-  }, []);
-
   // Determine questions based on selected module.
-  // If module is "Daily Workout", use aggregatedDailyWorkout; otherwise, load the subject's questions.
+  // If module is "Daily Workout", use aggregatedDailyWorkout; otherwise, use questionsData for the subject.
   const subjectQuestions = useMemo(() => {
     if (selectedModule) {
-      if (selectedModule.name === "Daily Workout") {
+      if (selectedModule.title === "Daily Workout") {
         return aggregatedDailyWorkout;
       } else {
-        return questionsData[selectedModule.name];
+        return questionsData[selectedModule.title];
       }
     }
     return null;
   }, [selectedModule, aggregatedDailyWorkout]);
 
-  // Determine if subject questions have categories (Basic/Advanced) or are a flat array.
+  // If subjectQuestions has categories (object with Basic/Advanced), we choose the "Basic" set (this can be enhanced later)
   const hasCategories = subjectQuestions && typeof subjectQuestions === "object" && !Array.isArray(subjectQuestions);
-  // For simplicity, if there are categories, we take the "Basic" set. (You could later add a picker.)
   const currentQuiz = useMemo(() => {
     if (hasCategories) {
       return subjectQuestions["Basic"] || [];
@@ -399,8 +369,6 @@ export default function FinancePrepApp() {
   const [showResult, setShowResult] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
-  const currentQ = currentQuiz[qIndex];
-
   const handleChoice = (index) => {
     setSelectedChoice(index);
     setShowResult(true);
@@ -410,11 +378,10 @@ export default function FinancePrepApp() {
     setTimeout(() => {
       setShowResult(false);
       setSelectedChoice(null);
+      setShowExplanation(false);
       setQIndex((prev) => (prev + 1 < currentQuiz.length ? prev + 1 : -1));
     }, 1200);
   };
-
-  const toggleExplanation = () => setShowExplanation((prev) => !prev);
 
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
@@ -424,8 +391,8 @@ export default function FinancePrepApp() {
           <div
             className="w-14 h-14 flex items-center justify-center text-white rounded-full"
             style={{
-              backgroundColor: '#2D2E82',
-              clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+              backgroundColor: "#2D2E82",
+              clipPath: "polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)"
             }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -441,31 +408,37 @@ export default function FinancePrepApp() {
         {/* Content Area */}
         <div className="flex-1 overflow-y-auto">
           {activeTab === "Home" && screen === "home" && !selectedModule && (
-            <HomeScreen onSelectModule={(mod) => { setSelectedModule(mod); setScreen("quiz"); }} />
+            <HomeScreen onSelectModule={(mod) => { setSelectedModule(mod); setScreen("quiz"); setQIndex(0); }} />
           )}
           {activeTab === "Home" && screen === "quiz" && selectedModule && currentQuiz.length > 0 && (
             <div className="p-6">
-              <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="text-blue-600 text-sm underline mb-4">← Back to Home</button>
+              <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="text-blue-600 text-sm underline mb-4">
+                &larr; Back to Home
+              </button>
               <div className="mb-4">
                 <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${(qIndex + 1) / currentQuiz.length * 100}%` }}></div>
+                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
                 </div>
               </div>
               {qIndex !== -1 ? (
                 <div className="bg-white p-6 rounded-lg shadow-lg">
-                  <h2 className="text-xl text-gray-800 mb-4">{currentQ.question}</h2>
+                  <h2 className="text-xl text-gray-800 mb-4">{currentQuiz[qIndex].question}</h2>
                   <div className="space-y-3">
-                    {currentQ.choices.map((choice, i) => {
+                    {currentQuiz[qIndex].choices.map((choice, i) => {
                       let btnStyle = "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50";
                       if (showResult) {
-                        if (i === currentQ.answer) btnStyle = "bg-green-100 border-green-400 text-green-800";
+                        if (i === currentQuiz[qIndex].answer) btnStyle = "bg-green-100 border-green-400 text-green-800";
                         else if (selectedChoice === i) btnStyle = "bg-red-100 border-red-400 text-red-800";
                       } else if (selectedChoice === i) {
                         btnStyle = "bg-blue-50 border-blue-300 text-blue-800";
                       }
                       return (
-                        <button key={i} onClick={() => handleChoice(i)} className={`w-full p-3 rounded-lg transition duration-200 ${btnStyle}`}>
+                        <button
+                          key={i}
+                          onClick={() => handleChoice(i)}
+                          className={`w-full p-3 rounded-lg transition duration-200 ${btnStyle}`}
+                        >
                           {choice}
                         </button>
                       );
@@ -476,15 +449,15 @@ export default function FinancePrepApp() {
                   </button>
                   {showResult && (
                     <div className="mt-4 text-gray-800">
-                      {selectedChoice === currentQ.answer ? (
+                      {selectedChoice === currentQuiz[qIndex].answer ? (
                         <p className="text-green-600">Correct!</p>
                       ) : (
                         <p className="text-red-600">Incorrect</p>
                       )}
-                      <button onClick={toggleExplanation} className="mt-2 text-sm text-blue-600 underline">
+                      <button onClick={() => setShowExplanation((prev) => !prev)} className="mt-2 text-sm text-blue-600 underline">
                         {showExplanation ? "Hide Explanation" : "Show Explanation"}
                       </button>
-                      {showExplanation && <p className="mt-2 text-gray-600">{currentQ.explanation}</p>}
+                      {showExplanation && <p className="mt-2 text-gray-600">{currentQuiz[qIndex].explanation}</p>}
                     </div>
                   )}
                 </div>
@@ -510,11 +483,11 @@ export default function FinancePrepApp() {
 
         {/* Bottom Navigation */}
         <nav className="bg-white border-t border-gray-200 flex justify-around py-4">
-          <NavItem icon={<IconDailyWorkout />} label="Home" active={activeTab==="Home"} onClick={() => { setActiveTab("Home"); setScreen("home"); }} />
-          <NavItem icon={<IconPerformance />} label="Performance" active={activeTab==="Performance"} onClick={() => setActiveTab("Performance")} />
-          <NavItem icon={<IconDCF />} label="News" active={activeTab==="News"} onClick={() => setActiveTab("News")} />
-          <NavItem icon={<IconNotifications />} label="Notifications" active={activeTab==="Notifications"} onClick={() => setActiveTab("Notifications")} />
-          <NavItem icon={<IconMore />} label="More" active={activeTab==="More"} onClick={() => setActiveTab("More")} />
+          <NavItem icon={<IconDailyWorkout />} label="Home" active={activeTab === "Home"} onClick={() => { setActiveTab("Home"); setScreen("home"); }} />
+          <NavItem icon={<IconPerformance />} label="Performance" active={activeTab === "Performance"} onClick={() => setActiveTab("Performance")} />
+          <NavItem icon={<IconDCF />} label="News" active={activeTab === "News"} onClick={() => setActiveTab("News")} />
+          <NavItem icon={<IconNotifications />} label="Notifications" active={activeTab === "Notifications"} onClick={() => setActiveTab("Notifications")} />
+          <NavItem icon={<IconMore />} label="More" active={activeTab === "More"} onClick={() => setActiveTab("More")} />
         </nav>
       </div>
     </div>
