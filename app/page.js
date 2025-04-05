@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 
-// ---------- SVG Icon Components (professional, finance-inspired) ---------- //
+// ---------- Professional SVG Icon Components ---------- //
 function IconDailyWorkout() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Lightning bolt style icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
     </svg>
   );
@@ -13,7 +12,6 @@ function IconDailyWorkout() {
 function IconAccounting() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Dollar currency icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-3.314 0-6 1.79-6 4s2.686 4 6 4 6-1.79 6-4-2.686-4-6-4z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m0 14v1" />
     </svg>
@@ -22,7 +20,6 @@ function IconAccounting() {
 function IconValuation() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Line chart icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17l3-3 4 4" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11l3-3" />
@@ -32,7 +29,6 @@ function IconValuation() {
 function IconDCF() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Cash / money icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 12h2m16 0h2M12 2v2m0 16v2" />
     </svg>
@@ -41,7 +37,6 @@ function IconDCF() {
 function IconMA() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Handshake-like icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4l3 6-3 6-3-6 3-6z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12" />
     </svg>
@@ -50,7 +45,6 @@ function IconMA() {
 function IconLBO() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Building icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 3v4M8 3v4M3 10h18" />
     </svg>
@@ -59,7 +53,6 @@ function IconLBO() {
 function IconBrainTeaser() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Puzzle piece icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2" />
     </svg>
   );
@@ -67,7 +60,6 @@ function IconBrainTeaser() {
 function IconPerformance() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Bar graph icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6h6v6m-3-9a4 4 0 110-8 4 4 0 010 8z" />
     </svg>
   );
@@ -75,7 +67,6 @@ function IconPerformance() {
 function IconNotifications() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      {/* Bell icon */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1" />
     </svg>
   );
@@ -83,21 +74,19 @@ function IconNotifications() {
 function IconMore() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-      {/* Three dots icon */}
       <path d="M6 10a2 2 0 114 0 2 2 0 01-4 0zM10 4a2 2 0 100 4 2 2 0 000-4zm0 12a2 2 0 100 4 2 2 0 000-4z" />
     </svg>
   );
 }
 
-// ---------- Modules Data (Finance Workout Modules) ---------- //
+// ---------- Modules Data ---------- //
 const modulesData = [
   { id: 1, title: "Valuation Drill", icon: <IconValuation />, estimatedTime: "2 mins", color: "bg-blue-100" },
   { id: 2, title: "Accounting Review", icon: <IconAccounting />, estimatedTime: "3 mins", color: "bg-green-100" },
   { id: 3, title: "Markets Challenge", icon: <IconDailyWorkout />, estimatedTime: "2 mins", color: "bg-orange-100" }
 ];
 
-// ---------- Sample Quiz Data for a Module ---------- //
-// In a real app this would be pulled from JSON or an API.
+// ---------- Sample Quiz Data ---------- //
 const sampleQuiz = {
   question: "What is the formula for Enterprise Value?",
   choices: [
@@ -110,14 +99,14 @@ const sampleQuiz = {
   answer: 0
 };
 
-// ---------- Home Screen (Today's Workout) ---------- //
+// ---------- Home Screen Component ---------- //
 function HomeScreen({ onSelectModule }) {
-  // For demonstration, daily progress is hardcoded.
-  const progress = 40;
+  const progress = 40; // sample progress percentage
+
   return (
     <div className="p-6">
       <header className="mb-6">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Today's Workout</h1>
+        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Today&apos;s Workout</h1>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${progress}%` }}></div>
         </div>
@@ -144,9 +133,8 @@ function HomeScreen({ onSelectModule }) {
   );
 }
 
-// ---------- Quiz Screen ---------- //
+// ---------- Quiz Screen Component ---------- //
 function QuizScreen({ module, onBack }) {
-  // For simplicity, using sampleQuiz for every question.
   const [quiz, setQuiz] = useState([sampleQuiz]); 
   const [qIndex, setQIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState(null);
@@ -161,12 +149,10 @@ function QuizScreen({ module, onBack }) {
   };
 
   const handleSubmit = () => {
-    // In a real app, you would move to next question if available.
     setTimeout(() => {
       setShowResult(false);
       setSelectedChoice(null);
-      // For demo, end quiz after one question.
-      setQIndex(-1);
+      setQIndex((prev) => (prev + 1 < quiz.length ? prev + 1 : -1));
     }, 1200);
   };
 
@@ -231,7 +217,7 @@ function QuizScreen({ module, onBack }) {
   );
 }
 
-// ---------- Performance Tracker (Profile / Stats) ---------- //
+// ---------- Performance Tracker Component ---------- //
 function PerformanceTracker({ performanceData }) {
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
@@ -270,11 +256,11 @@ function PerformanceTracker({ performanceData }) {
   );
 }
 
-// ---------- News Screen ---------- //
+// ---------- News Screen Component ---------- //
 function NewsScreen() {
   const [headlines, setHeadlines] = useState([]);
   useEffect(() => {
-    // For demo purposes, using static headlines. In production, call an API.
+    // In production, fetch live news headlines from an API.
     setHeadlines([
       "Tech stocks soar amid market rally",
       "Federal Reserve hints at interest rate changes",
@@ -300,7 +286,7 @@ function NewsScreen() {
   );
 }
 
-// ---------- More Screen (Internship Tracker Placeholder) ---------- //
+// ---------- More Screen Component (Internship Tracker Placeholder) ---------- //
 function MoreScreen() {
   return (
     <div className="p-6 text-gray-600 space-y-6">
@@ -313,7 +299,7 @@ function MoreScreen() {
   );
 }
 
-// ---------- Bottom Navigation Item Component ---------- //
+// ---------- Navigation Item Component ---------- //
 function NavItem({ icon, label, active, onClick }) {
   return (
     <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
@@ -325,14 +311,10 @@ function NavItem({ icon, label, active, onClick }) {
 
 // ---------- Main App Component ---------- //
 export default function FinancePrepApp() {
-  // Active tab: "Home", "Performance", "News", "Notifications", "More"
+  // Active Tab: "Home", "Performance", "News", "Notifications", "More"
   const [activeTab, setActiveTab] = useState("Home");
   const [selectedModule, setSelectedModule] = useState(null);
-  
-  // For quiz screen state (if a module is selected)
   const [screen, setScreen] = useState("home"); // "home" or "quiz"
-
-  // Performance tracking state (dummy, for demo)
   const [performanceData, setPerformanceData] = useState({});
 
   return (
