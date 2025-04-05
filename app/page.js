@@ -79,12 +79,215 @@ function IconMore() {
   );
 }
 
-// ---------- Modules Data ---------- //
-const modulesData = [
-  { id: 1, title: "Valuation Drill", icon: <IconValuation />, estimatedTime: "2 mins", color: "bg-blue-100" },
-  { id: 2, title: "Accounting Review", icon: <IconAccounting />, estimatedTime: "3 mins", color: "bg-green-100" },
-  { id: 3, title: "Markets Challenge", icon: <IconDailyWorkout />, estimatedTime: "2 mins", color: "bg-orange-100" }
-];
+// ---------- HomeScreen Component ---------- //
+function HomeScreen({ onSelectModule }) {
+  return (
+    <div className="p-6">
+      <header className="mb-6">
+        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Today&apos;s Workout</h1>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="bg-blue-600 h-2 rounded-full" style={{ width: "40%" }}></div>
+        </div>
+        <button className="mt-3 text-sm text-blue-600 underline">Customize Workout</button>
+      </header>
+      <div className="space-y-4">
+        {[
+          { id: 1, title: "Valuation Drill", icon: <IconValuation />, estimatedTime: "2 mins", color: "bg-blue-100" },
+          { id: 2, title: "Accounting Review", icon: <IconAccounting />, estimatedTime: "3 mins", color: "bg-green-100" },
+          { id: 3, title: "Markets Challenge", icon: <IconDailyWorkout />, estimatedTime: "2 mins", color: "bg-orange-100" }
+        ].map((mod) => (
+          <div
+            key={mod.id}
+            onClick={() => onSelectModule(mod)}
+            className={`p-4 ${mod.color} rounded-lg shadow cursor-pointer transition transform hover:scale-105`}
+          >
+            <div className="flex items-center">
+              <div className="p-3 bg-white rounded-full mr-4">{mod.icon}</div>
+              <div>
+                <h2 className="text-xl text-gray-700 font-medium">{mod.title}</h2>
+                <p className="text-sm text-gray-500">{mod.estimatedTime}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------- QuizScreen Component ---------- //
+function QuizScreen({ currentQuiz, qIndex, handleChoice, handleSubmit, selectedChoice, showResult, showExplanation, setShowExplanation }) {
+  return (
+    <div className="p-6">
+      <button onClick={() => {}} className="text-blue-600 text-sm underline mb-4">
+        &larr; Back to Home
+      </button>
+      <div className="mb-4">
+        <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
+        </div>
+      </div>
+      {qIndex !== -1 ? (
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl text-gray-800 mb-4">{currentQuiz[qIndex].question}</h2>
+          <div className="space-y-3">
+            {currentQuiz[qIndex].choices.map((choice, i) => {
+              let btnStyle = "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50";
+              if (showResult) {
+                if (i === currentQuiz[qIndex].answer) btnStyle = "bg-green-100 border-green-400 text-green-800";
+                else if (selectedChoice === i) btnStyle = "bg-red-100 border-red-400 text-red-800";
+              } else if (selectedChoice === i) {
+                btnStyle = "bg-blue-50 border-blue-300 text-blue-800";
+              }
+              return (
+                <button
+                  key={i}
+                  onClick={() => handleChoice(i)}
+                  className={`w-full p-3 rounded-lg transition duration-200 ${btnStyle}`}
+                >
+                  {choice}
+                </button>
+              );
+            })}
+          </div>
+          <button onClick={handleSubmit} className="mt-6 w-full py-3 bg-blue-600 text-white rounded-lg transition duration-200 hover:bg-blue-700">
+            Submit
+          </button>
+          {showResult && (
+            <div className="mt-4 text-gray-800">
+              {selectedChoice === currentQuiz[qIndex].answer ? (
+                <p className="text-green-600">Correct!</p>
+              ) : (
+                <p className="text-red-600">Incorrect</p>
+              )}
+              <button onClick={() => setShowExplanation((prev) => !prev)} className="mt-2 text-sm text-blue-600 underline">
+                {showExplanation ? "Hide Explanation" : "Show Explanation"}
+              </button>
+              {showExplanation && <p className="mt-2 text-gray-600">{currentQuiz[qIndex].explanation}</p>}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center text-center space-y-4">
+          <div className="text-5xl text-gray-800">🎉</div>
+          <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
+          <p className="text-lg text-gray-600">You completed the quiz!</p>
+          <button onClick={() => {}} className="bg-gray-800 text-white px-6 py-2 rounded-full shadow">
+            Back to Home
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------- PerformanceTracker Component ---------- //
+function PerformanceTracker({ performanceData }) {
+  return (
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-4 border-b border-gray-200 pb-2 text-gray-800">Performance Tracker</h2>
+      {Object.keys(performanceData).length === 0 ? (
+        <p className="text-gray-600">No performance data yet.</p>
+      ) : (
+        <table className="w-full text-left">
+          <thead>
+            <tr>
+              <th className="py-2">Subject</th>
+              <th className="py-2">Quizzes</th>
+              <th className="py-2">Total Qs</th>
+              <th className="py-2">Correct</th>
+              <th className="py-2">Accuracy</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(performanceData).map((subject) => {
+              const data = performanceData[subject];
+              const accuracy = ((data.totalCorrect / data.totalQuestions) * 100).toFixed(1);
+              return (
+                <tr key={subject} className="border-b border-gray-100">
+                  <td className="py-2 text-gray-700">{subject}</td>
+                  <td className="py-2 text-gray-700">{data.quizzes}</td>
+                  <td className="py-2 text-gray-700">{data.totalQuestions}</td>
+                  <td className="py-2 text-gray-700">{data.totalCorrect}</td>
+                  <td className="py-2 text-gray-700">{accuracy}%</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+// ---------- NewsScreen Component (Finance News Only) ---------- //
+function NewsScreen() {
+  const [headlines, setHeadlines] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          "https://newsapi.org/v2/top-headlines?country=us&category=business&q=finance&apiKey=c27c26d8271048aa888955ccc80447c1"
+        );
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        const titles = data.articles.map((article) => article.title);
+        setHeadlines(titles);
+      } catch (err) {
+        console.error("Failed to fetch news:", err);
+        setError("Failed to fetch finance news.");
+      }
+    };
+    fetchNews();
+    const interval = setInterval(fetchNews, 15 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Finance News Today</h2>
+      {error ? (
+        <p className="text-gray-600">{error}</p>
+      ) : headlines.length === 0 ? (
+        <p className="text-gray-600">Fetching finance news headlines...</p>
+      ) : (
+        <ul className="space-y-2">
+          {headlines.map((headline, i) => (
+            <li key={i} className="text-lg text-gray-700 border-b border-gray-200 pb-2">
+              {headline}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// ---------- MoreScreen Component (Internship Tracker Placeholder) ---------- //
+function MoreScreen() {
+  return (
+    <div className="p-6 text-gray-600 space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-800">More</h2>
+      <div>
+        <h3 className="text-xl font-medium mb-2 text-gray-700">Internship Tracker</h3>
+        <p className="text-lg text-gray-700">[Internship tracker content placeholder]</p>
+      </div>
+    </div>
+  );
+}
+
+// ---------- NavItem Component ---------- //
+function NavItem({ icon, label, active, onClick }) {
+  return (
+    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
+      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
+      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
+    </div>
+  );
+}
 
 // ---------- Full Questions Data ---------- //
 const questionsData = {
@@ -191,14 +394,65 @@ const questionsData = {
       { question: "An Earnout in M&amp;A transactions primarily serves to:", choices: ["Immediately reduce the purchase price", "Guarantee future revenue synergies", "Incentivize sellers to achieve future financial goals", "Transfer tax liabilities to the buyer"], answer: 2 },
       { question: "In accounting for transaction and financing fees under current rules:", choices: ["Both are fully capitalized and amortized", "Transaction fees are expensed immediately; financing fees are capitalized and amortized", "Both are expensed immediately", "Both are ignored"], answer: 1 }
     ]
+  },
+  "Discounted Cash Flow": {
+    Basic: [
+      { question: "A Discounted Cash Flow (DCF) valuation primarily relies on:", choices: ["Historical earnings", "Present Value of future cash flows and Terminal Value", "Book value of equity", "Dividend payments only"], answer: 1 },
+      { question: "What is typically used as the discount rate in a DCF model?", choices: ["Cost of Equity only", "Weighted Average Cost of Capital (WACC)", "Cost of Debt only", "Risk-Free Rate"], answer: 1 },
+      { question: "The standard formula to calculate the Weighted Average Cost of Capital (WACC) includes:", choices: ["Equity, Debt, Preferred Stock proportions, and their respective costs", "Equity and Debt proportions only", "Equity Risk Premium alone", "Tax Rate and Equity Cost only"], answer: 0 },
+      { question: "To calculate Cost of Equity using the Capital Asset Pricing Model (CAPM), the correct formula is:", choices: ["Risk-Free Rate + Debt Premium", "Risk-Free Rate + Beta × Equity Risk Premium", "Beta × Risk-Free Rate", "Equity Risk Premium – Beta"], answer: 1 },
+      { question: "Unlevering and re-levering Beta is necessary because:", choices: ["It simplifies the DCF calculation.", "Each company has a different capital structure, affecting Beta.", "Levered Beta is irrelevant to Cost of Equity.", "It removes all market risk."], answer: 1 },
+      { question: "Levered Free Cash Flow provides valuation for:", choices: ["Enterprise Value", "Debt Holders Only", "Equity Value", "Preferred Stock Holders Only"], answer: 2 },
+      { question: "Which method is generally preferred for calculating Terminal Value in banking?", choices: ["Gordon Growth Model", "Multiples Method", "Dividend Discount Model", "Cost of Equity Method"], answer: 1 },
+      { question: "In calculating Terminal Value using Gordon Growth, an appropriate growth rate typically would be:", choices: ["Significantly higher than GDP growth", "Equivalent to historical stock market returns", "The country&apos;s long-term GDP growth or inflation rate", "Zero percent"], answer: 2 },
+      { question: "Which change typically has the larger impact on a DCF valuation?", choices: ["10% change in projected revenue", "1% change in discount rate", "1% increase in tax rate", "5% increase in depreciation"], answer: 0 },
+      { question: "Dividend yield is already reflected in:", choices: ["WACC calculation", "Beta within the CAPM formula", "Terminal value calculation", "Risk-free rate"], answer: 1 }
+    ],
+    Advanced: [
+      { question: "Why is the mid-year convention used in a DCF?", choices: ["To simplify calculations", "Because cash flows arrive evenly throughout the year", "To inflate valuations artificially", "To ignore discounting completely"], answer: 1 },
+      { question: "With the mid-year convention, the discount period for Year 2 cash flow is:", choices: ["0.5", "1", "1.5", "2"], answer: 2 },
+      { question: "When using mid-year convention, how does the discount period change for Terminal Value calculated using the Multiples Method?", choices: ["It remains the same", "You subtract 0.5 from the final year", "You add 0.5 to the final year", "You double the final year"], answer: 2 },
+      { question: "How is a public company&apos;s per-share value calculated after determining Enterprise Value in a DCF?", choices: ["Subtract debt and cash from Enterprise Value, ignoring dilution", "Add cash, subtract debt, preferred stock, minority interest, and calculate dilution iteratively", "Use Enterprise Value divided by basic shares outstanding directly", "Only subtract debt from Enterprise Value"], answer: 1 },
+      { question: "In a Dividend Discount Model (DDM), the discount rate typically used is:", choices: ["WACC", "Cost of Debt", "Cost of Equity", "Risk-Free Rate"], answer: 2 },
+      { question: "Convertible debt should be considered equity (rather than debt) in WACC calculations when:", choices: ["It is out-of-the-money", "It has recently been issued", "It is in-the-money", "The company has high overall debt"], answer: 2 },
+      { question: "If a company plans significant CapEx in Year 4, how does this affect the DCF valuation?", choices: ["No effect on Enterprise Value", "Enterprise Value increases immediately", "Enterprise Value decreases by the present value of the CapEx", "Enterprise Value doubles"], answer: 2 },
+      { question: "Why might iterative calculations be necessary in Excel when calculating per-share value in a DCF for a public company?", choices: ["To correctly account for dilution from convertible securities and options", "Because WACC changes each year", "To include taxes on dividends", "Due to fluctuating market values"], answer: 0 },
+      { question: "In the Gordon Growth Method for terminal value calculation with mid-year convention, the final year discount period is:", choices: ["Reduced by 0.5", "Increased by 0.5", "Used as is without adjustment", "Doubled"], answer: 2 },
+      { question: "How is a stub period discount period handled in a mid-year convention DCF model?", choices: ["It is ignored completely", "Use the full stub period without adjustment", "Divide the stub period by two", "Add a full year to the stub period"], answer: 2 }
+    ]
+  },
+  "M&A": {
+    Basic: [
+      { question: "A merger model primarily helps determine:", choices: ["The tax benefits of a merger", "If the buyer’s EPS increases or decreases post-acquisition", "The impact on debt covenants", "Management compensation"], answer: 1 },
+      { question: "In a merger, typically the buyer and seller:", choices: ["Are drastically different sizes", "Are similar in size", "Must both be private companies", "Always have different industries"], answer: 1 },
+      { question: "Which of these is NOT a typical reason for an acquisition?", choices: ["To acquire critical technology or IP", "To gain market share", "To decrease revenue and increase expenses", "To acquire new customers"], answer: 2 },
+      { question: "An acquisition is dilutive when:", choices: ["The seller’s net income outweighs the costs of financing", "The buyer issues fewer shares than expected", "Additional net income from the seller does not offset acquisition costs", "The seller has higher EBITDA margins than the buyer"], answer: 2 },
+      { question: "Which is true for an all-stock deal regarding accretion and dilution?", choices: ["If the buyer&apos;s P/E is lower than the seller&apos;s, it&apos;s accretive.", "If the buyer&apos;s P/E is higher than the seller&apos;s, it&apos;s accretive.", "P/E ratios don&apos;t matter for stock deals.", "Accretion or dilution is unaffected by P/E ratios."], answer: 1 },
+      { question: "Which of the following are typical acquisition effects?", choices: ["Decreased interest payments", "Fewer shares outstanding", "Creation of Goodwill &amp; Other Intangibles", "Decreased debt"], answer: 2 },
+      { question: "Why might a company with ample cash still choose not to pay cash in an acquisition?", choices: ["Cash always increases the transaction cost", "Debt financing is always cheaper", "To preserve liquidity for future uncertainty", "To increase immediate tax liabilities"], answer: 2 },
+      { question: "Strategic acquirers typically pay more than private equity firms due to:", choices: ["Lower valuations required by shareholders", "Lack of competitive pressure", "Ability to realize revenue and cost synergies", "Preference for cash transactions"], answer: 2 },
+      { question: "The primary difference between Goodwill and Other Intangible Assets is that:", choices: ["Goodwill is amortized, Other Intangibles are not", "Goodwill remains stable unless impaired; Other Intangibles are amortized", "Both are amortized over the same period", "Goodwill always represents physical assets"], answer: 1 },
+      { question: "Which type of synergy is typically considered more realistic in mergers and acquisitions?", choices: ["Revenue synergies", "Cost synergies", "Technological synergies", "Geographic synergies"], answer: 1 }
+    ],
+    Advanced: [
+      { question: "In an M&amp;A deal using purchase accounting:", choices: ["Shareholders&apos; equity numbers combine directly", "The seller&apos;s equity is wiped out and Goodwill is recorded", "Only tangible assets combine", "Intangible assets are ignored"], answer: 1 },
+      { question: "Revenue synergies are typically calculated by:", choices: ["Estimating incremental revenue from improved business performance", "Multiplying the total number of employees by average salary", "Ignoring potential future benefits completely", "Reducing costs related to redundant processes"], answer: 0 },
+      { question: "Allowable NOL usage in an acquisition under Section 382 is calculated as:", choices: ["Seller&apos;s NOL balance multiplied by tax rate", "Seller&apos;s total assets divided by purchase price", "Equity Purchase Price multiplied by the highest past 3-month adjusted long-term rate", "Debt issued multiplied by tax rate"], answer: 2 },
+      { question: "Deferred Tax Liabilities (DTLs) in an M&amp;A deal are created when:", choices: ["Assets are written down", "Assets are written up", "NOLs are fully used", "Debt is repaid"], answer: 1 },
+      { question: "What happens to Deferred Tax Assets (DTAs) and Deferred Tax Liabilities (DTLs) in an asset purchase?", choices: ["Both are significantly increased", "Neither are created, since book and tax bases align", "DTLs increase, DTAs decrease", "DTAs increase, DTLs decrease"], answer: 1 },
+      { question: "The complete formula for calculating Goodwill in an M&amp;A deal is:", choices: ["Equity Purchase Price – Seller Book Value", "Equity Purchase Price + Seller Book Value + Existing Goodwill", "Equity Purchase Price – Seller Book Value + Existing Goodwill – Asset Write-Ups – Existing DTL + DTA Write-Down + New DTL", "Purchase Price – Debt"], answer: 2 },
+      { question: "Section 338(h)(10) elections in an M&amp;A deal are advantageous because they:", choices: ["Avoid taxation completely for the seller", "Provide the buyer with a step-up tax basis for depreciating assets", "Treat the transaction purely as stock for accounting purposes", "Eliminate all goodwill"], answer: 1 },
+      { question: "An exchange ratio in an all-stock M&amp;A deal defines:", choices: ["A fixed dollar amount the seller receives", "The number of buyer&apos;s shares the seller receives per share owned", "The total cash value exchanged in the transaction", "The debt issued by the buyer"], answer: 1 },
+      { question: "An Earnout in M&amp;A transactions primarily serves to:", choices: ["Immediately reduce the purchase price", "Guarantee future revenue synergies", "Incentivize sellers to achieve future financial goals", "Transfer tax liabilities to the buyer"], answer: 2 },
+      { question: "In accounting for transaction and financing fees under current rules:", choices: ["Both are fully capitalized and amortized", "Transaction fees are expensed immediately; financing fees are capitalized and amortized", "Both are expensed immediately", "Both are ignored"], answer: 1 }
+    ]
   }
 };
 
 // ---------- Daily Workout Aggregation ---------- //
-const dailyWorkoutSubjects = ["Accounting", "Valuation", "Discounted Cash Flow", "M&A", "LBO"];
-// Note: For aggregation we create a helper function.
 function getAggregatedDailyWorkout() {
   let agg = [];
+  const dailyWorkoutSubjects = ["Accounting", "Valuation", "Discounted Cash Flow", "M&A", "LBO"];
   dailyWorkoutSubjects.forEach((sub) => {
     const subData = questionsData[sub];
     if (subData && subData.Basic && subData.Basic.length >= 4) {
@@ -206,9 +460,8 @@ function getAggregatedDailyWorkout() {
       agg = agg.concat(shuffled.slice(0, 4));
     }
   });
-  return [...agg].sort(() => Math.random() - 0.5);
+  return agg.sort(() => Math.random() - 0.5);
 }
-const aggregatedDailyWorkout = useMemo(() => getAggregatedDailyWorkout(), []);
 
 // ---------- Performance Tracking ---------- //
 function updateSubjectPerformance(subject, score, total, setPerformanceData) {
@@ -261,7 +514,7 @@ function PerformanceTracker({ performanceData }) {
   );
 }
 
-// ---------- News Screen (Finance News Only) ---------- //
+// ---------- NewsScreen Component (Finance News Only) ---------- //
 function NewsScreen() {
   const [headlines, setHeadlines] = useState([]);
   const [error, setError] = useState(null);
@@ -272,9 +525,7 @@ function NewsScreen() {
         const response = await fetch(
           "https://newsapi.org/v2/top-headlines?country=us&category=business&q=finance&apiKey=c27c26d8271048aa888955ccc80447c1"
         );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         const titles = data.articles.map((article) => article.title);
         setHeadlines(titles);
@@ -283,7 +534,6 @@ function NewsScreen() {
         setError("Failed to fetch finance news.");
       }
     };
-
     fetchNews();
     const interval = setInterval(fetchNews, 15 * 60 * 1000);
     return () => clearInterval(interval);
@@ -309,7 +559,7 @@ function NewsScreen() {
   );
 }
 
-// ---------- More Screen (Internship Tracker Placeholder) ---------- //
+// ---------- MoreScreen Component (Internship Tracker Placeholder) ---------- //
 function MoreScreen() {
   return (
     <div className="p-6 text-gray-600 space-y-6">
@@ -322,7 +572,7 @@ function MoreScreen() {
   );
 }
 
-// ---------- Navigation Item Component ---------- //
+// ---------- NavItem Component ---------- //
 function NavItem({ icon, label, active, onClick }) {
   return (
     <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
@@ -339,9 +589,18 @@ export default function FinancePrepApp() {
   const [selectedModule, setSelectedModule] = useState(null);
   const [screen, setScreen] = useState("home"); // "home" or "quiz"
   const [performanceData, setPerformanceData] = useState({});
+  const [qIndex, setQIndex] = useState(0);
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
+
+  // Compute aggregated daily workout inside the component
+  const aggregatedDailyWorkout = useMemo(() => {
+    return getAggregatedDailyWorkout();
+  }, []);
 
   // Determine questions based on selected module.
-  // If module is "Daily Workout", use aggregatedDailyWorkout; otherwise, use questionsData for the subject.
+  // If module title is "Daily Workout", use aggregatedDailyWorkout; otherwise, use questionsData based on module title.
   const subjectQuestions = useMemo(() => {
     if (selectedModule) {
       if (selectedModule.title === "Daily Workout") {
@@ -353,7 +612,7 @@ export default function FinancePrepApp() {
     return null;
   }, [selectedModule, aggregatedDailyWorkout]);
 
-  // If subjectQuestions has categories (object with Basic/Advanced), we choose the "Basic" set (this can be enhanced later)
+  // If subjectQuestions is an object (has Basic/Advanced), default to "Basic" set.
   const hasCategories = subjectQuestions && typeof subjectQuestions === "object" && !Array.isArray(subjectQuestions);
   const currentQuiz = useMemo(() => {
     if (hasCategories) {
@@ -363,11 +622,6 @@ export default function FinancePrepApp() {
     }
     return [];
   }, [hasCategories, subjectQuestions]);
-
-  const [qIndex, setQIndex] = useState(0);
-  const [selectedChoice, setSelectedChoice] = useState(null);
-  const [showResult, setShowResult] = useState(false);
-  const [showExplanation, setShowExplanation] = useState(false);
 
   const handleChoice = (index) => {
     setSelectedChoice(index);
@@ -422,45 +676,16 @@ export default function FinancePrepApp() {
                 </div>
               </div>
               {qIndex !== -1 ? (
-                <div className="bg-white p-6 rounded-lg shadow-lg">
-                  <h2 className="text-xl text-gray-800 mb-4">{currentQuiz[qIndex].question}</h2>
-                  <div className="space-y-3">
-                    {currentQuiz[qIndex].choices.map((choice, i) => {
-                      let btnStyle = "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50";
-                      if (showResult) {
-                        if (i === currentQuiz[qIndex].answer) btnStyle = "bg-green-100 border-green-400 text-green-800";
-                        else if (selectedChoice === i) btnStyle = "bg-red-100 border-red-400 text-red-800";
-                      } else if (selectedChoice === i) {
-                        btnStyle = "bg-blue-50 border-blue-300 text-blue-800";
-                      }
-                      return (
-                        <button
-                          key={i}
-                          onClick={() => handleChoice(i)}
-                          className={`w-full p-3 rounded-lg transition duration-200 ${btnStyle}`}
-                        >
-                          {choice}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <button onClick={handleSubmit} className="mt-6 w-full py-3 bg-blue-600 text-white rounded-lg transition duration-200 hover:bg-blue-700">
-                    Submit
-                  </button>
-                  {showResult && (
-                    <div className="mt-4 text-gray-800">
-                      {selectedChoice === currentQuiz[qIndex].answer ? (
-                        <p className="text-green-600">Correct!</p>
-                      ) : (
-                        <p className="text-red-600">Incorrect</p>
-                      )}
-                      <button onClick={() => setShowExplanation((prev) => !prev)} className="mt-2 text-sm text-blue-600 underline">
-                        {showExplanation ? "Hide Explanation" : "Show Explanation"}
-                      </button>
-                      {showExplanation && <p className="mt-2 text-gray-600">{currentQuiz[qIndex].explanation}</p>}
-                    </div>
-                  )}
-                </div>
+                <QuizScreen
+                  currentQuiz={currentQuiz}
+                  qIndex={qIndex}
+                  handleChoice={handleChoice}
+                  handleSubmit={handleSubmit}
+                  selectedChoice={selectedChoice}
+                  showResult={showResult}
+                  showExplanation={showExplanation}
+                  setShowExplanation={setShowExplanation}
+                />
               ) : (
                 <div className="flex flex-col items-center justify-center text-center space-y-4">
                   <div className="text-5xl text-gray-800">🎉</div>
