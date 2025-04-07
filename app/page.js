@@ -118,7 +118,7 @@ function HomeScreen({ onSelectModule }) {
 // ---------- QuizScreen Component ---------- //
 function QuizScreen({ currentQuiz, qIndex, handleChoice, handleSubmit, selectedChoice, showResult, showExplanation, setShowExplanation }) {
   return (
-    <div className="p-6">
+    <div className="p-6 flex-1">
       <button onClick={() => {}} className="text-blue-600 text-sm underline mb-4">&larr; Back to Home</button>
       <div className="mb-4">
         <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
@@ -167,7 +167,7 @@ function QuizScreen({ currentQuiz, qIndex, handleChoice, handleSubmit, selectedC
           )}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center text-center space-y-4">
+        <div className="flex flex-col items-center justify-center text-center space-y-4 h-full">
           <div className="text-5xl text-gray-800">🎉</div>
           <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
           <p className="text-lg text-gray-600">You completed the quiz!</p>
@@ -247,10 +247,10 @@ function NewsScreen({ selectedModule }) {
 
   const subjectQuestions = selectedModule
     ? selectedModule.title.includes("Valuation")
-      ? (questionsData["Valuation"]?.Basic || [])
+      ? questionsData["Valuation"]?.Basic || []
       : selectedModule.title.includes("Accounting")
-      ? (questionsData["Accounting"]?.Basic || [])
-      : selectedModule.title.includes("Markets")
+      ? questionsData["Accounting"]?.Basic || []
+      : selectedModule.title.includes("Markets") || selectedModule.title.includes("Daily Workout")
       ? getAggregatedDailyWorkout()
       : []
     : [];
@@ -400,18 +400,19 @@ export default function FinancePrepApp() {
   const [showResult, setShowResult] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
-  const aggregatedDailyWorkout = useMemo(() => getAggregatedDailyWorkout(), []);
-
+  // Updated subjectQuestions logic based on module title keywords.
   const subjectQuestions = useMemo(() => {
     if (selectedModule) {
-      if (selectedModule.title === "Daily Workout") {
-        return aggregatedDailyWorkout;
-      } else {
-        return questionsData[selectedModule.title] || null;
+      if (selectedModule.title.includes("Markets") || selectedModule.title.includes("Daily Workout")) {
+        return getAggregatedDailyWorkout();
+      } else if (selectedModule.title.includes("Valuation")) {
+        return questionsData["Valuation"];
+      } else if (selectedModule.title.includes("Accounting")) {
+        return questionsData["Accounting"];
       }
     }
     return null;
-  }, [selectedModule, aggregatedDailyWorkout]);
+  }, [selectedModule]);
 
   const hasCategories = subjectQuestions && typeof subjectQuestions === "object" && !Array.isArray(subjectQuestions);
   const currentQuiz = useMemo(() => {
@@ -438,8 +439,8 @@ export default function FinancePrepApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      <div className="relative w-full max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden flex flex-col">
+    <div className="h-screen bg-gray-100 font-sans">
+      <div className="relative w-full max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden flex flex-col h-full">
         {/* Header */}
         <header className="flex items-center p-6 border-b border-gray-200">
           <div
@@ -464,39 +465,39 @@ export default function FinancePrepApp() {
           {activeTab === "Home" && screen === "home" && !selectedModule && (
             <HomeScreen onSelectModule={(mod) => { setSelectedModule(mod); setScreen("quiz"); setQIndex(0); }} />
           )}
-          {activeTab === "Home" && screen === "quiz" && selectedModule && currentQuiz.length > 0 && (
-            <div className="p-6">
-              <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="text-blue-600 text-sm underline mb-4">
-                &larr; Back to Home
-              </button>
-              <div className="mb-4">
-                <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
+          {activeTab === "Home" && screen === "quiz" && selectedModule && (
+            <>
+              {currentQuiz.length > 0 ? (
+                <div className="p-6">
+                  <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="text-blue-600 text-sm underline mb-4">
+                    &larr; Back to Home
+                  </button>
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
+                    </div>
+                  </div>
+                  <QuizScreen
+                    currentQuiz={currentQuiz}
+                    qIndex={qIndex}
+                    handleChoice={handleChoice}
+                    handleSubmit={handleSubmit}
+                    selectedChoice={selectedChoice}
+                    showResult={showResult}
+                    showExplanation={showExplanation}
+                    setShowExplanation={setShowExplanation}
+                  />
                 </div>
-              </div>
-              {qIndex !== -1 ? (
-                <QuizScreen
-                  currentQuiz={currentQuiz}
-                  qIndex={qIndex}
-                  handleChoice={handleChoice}
-                  handleSubmit={handleSubmit}
-                  selectedChoice={selectedChoice}
-                  showResult={showResult}
-                  showExplanation={showExplanation}
-                  setShowExplanation={setShowExplanation}
-                />
               ) : (
-                <div className="flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="text-5xl text-gray-800">🎉</div>
-                  <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
-                  <p className="text-lg text-gray-600">You completed the quiz!</p>
-                  <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="bg-gray-800 text-white px-6 py-2 rounded-full shadow">
+                <div className="p-6 flex flex-col items-center justify-center h-full">
+                  <p className="text-gray-700">No questions available for this drill.</p>
+                  <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="mt-4 bg-gray-800 text-white px-6 py-2 rounded-full shadow">
                     Back to Home
                   </button>
                 </div>
               )}
-            </div>
+            </>
           )}
           {activeTab === "Performance" && <PerformanceTracker performanceData={performanceData} />}
           {activeTab === "News" && <NewsScreen selectedModule={selectedModule} />}
