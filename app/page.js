@@ -245,7 +245,6 @@ function NewsScreen({ selectedModule }) {
     return () => clearInterval(interval);
   }, []);
 
-  // Determine subject-specific questions if a module is selected.
   const subjectQuestions = selectedModule
     ? selectedModule.title.includes("Valuation")
       ? (questionsData["Valuation"]?.Basic || [])
@@ -390,19 +389,8 @@ function getAggregatedDailyWorkout() {
   return agg.sort(() => Math.random() - 0.5);
 }
 
-// ---------- NavItem Component ---------- //
-function NavItem({ icon, label, active, onClick }) {
-  return (
-    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
-      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
-    </div>
-  );
-}
-
 // ---------- Main App Component ---------- //
 export default function FinancePrepApp() {
-  // Active Tab: "Home", "Performance", "News", "Notifications", "More"
   const [activeTab, setActiveTab] = useState("Home");
   const [selectedModule, setSelectedModule] = useState(null);
   const [screen, setScreen] = useState("home"); // "home" or "quiz"
@@ -412,11 +400,8 @@ export default function FinancePrepApp() {
   const [showResult, setShowResult] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
-  // Compute aggregated daily workout inside the component
   const aggregatedDailyWorkout = useMemo(() => getAggregatedDailyWorkout(), []);
 
-  // Determine questions based on selected module.
-  // If module title is "Daily Workout", use aggregatedDailyWorkout; otherwise, use questionsData based on module title.
   const subjectQuestions = useMemo(() => {
     if (selectedModule) {
       if (selectedModule.title === "Daily Workout") {
@@ -428,7 +413,6 @@ export default function FinancePrepApp() {
     return null;
   }, [selectedModule, aggregatedDailyWorkout]);
 
-  // If subjectQuestions is an object (has Basic/Advanced), default to "Basic" set.
   const hasCategories = subjectQuestions && typeof subjectQuestions === "object" && !Array.isArray(subjectQuestions);
   const currentQuiz = useMemo(() => {
     if (hasCategories) {
