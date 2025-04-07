@@ -79,6 +79,16 @@ function IconMore() {
   );
 }
 
+// ---------- NavItem Component (Single Declaration) ---------- //
+function NavItem({ icon, label, active, onClick }) {
+  return (
+    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
+      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
+      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
+    </div>
+  );
+}
+
 // ---------- HomeScreen Component ---------- //
 function HomeScreen({ onSelectModule }) {
   return (
@@ -308,16 +318,6 @@ function MoreScreen() {
   );
 }
 
-// ---------- NavItem Component ---------- //
-function NavItem({ icon, label, active, onClick }) {
-  return (
-    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
-      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
-    </div>
-  );
-}
-
 // ---------- Full Questions Data (Consolidated) ---------- //
 const questionsData = {
   Accounting: {
@@ -388,16 +388,6 @@ function getAggregatedDailyWorkout() {
     }
   });
   return agg.sort(() => Math.random() - 0.5);
-}
-
-// ---------- NavItem Component ---------- //
-function NavItem({ icon, label, active, onClick }) {
-  return (
-    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
-      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
-    </div>
-  );
 }
 
 // ---------- Main App Component ---------- //
