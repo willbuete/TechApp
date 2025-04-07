@@ -1,526 +1,448 @@
-'use client';
-import { useEffect, useState, useMemo } from 'react';
+import SwiftUI
+import Combine
 
-// ---------- Professional SVG Icon Components ---------- //
-function IconDailyWorkout() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-    </svg>
-  );
-}
-function IconAccounting() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-3.314 0-6 1.79-6 4s2.686 4 6 4 6-1.79 6-4-2.686-4-6-4z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m0 14v1" />
-    </svg>
-  );
-}
-function IconValuation() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17l3-3 4 4" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11l3-3" />
-    </svg>
-  );
-}
-function IconDCF() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 12h2m16 0h2M12 2v2m0 16v2" />
-    </svg>
-  );
-}
-function IconMA() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4l3 6-3 6-3-6 3-6z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12" />
-    </svg>
-  );
-}
-function IconLBO() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-2a4 4 0 014-4h10a4 4 0 014 4v2" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 3v4M8 3v4M3 10h18" />
-    </svg>
-  );
-}
-function IconBrainTeaser() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2H7a2 2 0 00-2 2v2a2 2 0 002 2h2v2" />
-    </svg>
-  );
-}
-function IconPerformance() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6h6v6m-3-9a4 4 0 110-8 4 4 0 010 8z" />
-    </svg>
-  );
-}
-function IconNotifications() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1" />
-    </svg>
-  );
-}
-function IconMore() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M6 10a2 2 0 114 0 2 2 0 01-4 0zM10 4a2 2 0 100 4 2 2 0 000-4zm0 12a2 2 0 100 4 2 2 0 000-4z" />
-    </svg>
-  );
+// MARK: - Model
+
+struct Question: Identifiable, Codable {
+    let id: Int
+    let prompt: String
+    let options: [String]      // For MCQ mode
+    let correctIndex: Int?     // Nil for flashcard-only questions
+    let explanation: String
 }
 
-// ---------- NavItem Component (Single Declaration) ---------- //
-function NavItem({ icon, label, active, onClick }) {
-  return (
-    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
-      <span className={`h-7 w-7 ${active ? "text-blue-600" : "text-gray-500"}`}>{icon}</span>
-      <span className={`text-sm ${active ? "text-blue-600" : "text-gray-500"}`}>{label}</span>
-    </div>
-  );
+// MARK: - Quiz Mode Enum
+
+enum QuizMode: String, CaseIterable {
+    case mcq = "MCQ"
+    case flashcard = "Flashcard"
 }
 
-// ---------- HomeScreen Component ---------- //
-function HomeScreen({ onSelectModule }) {
-  return (
-    <div className="p-6">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Today&apos;s Workout</h1>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div className="bg-blue-600 h-2 rounded-full" style={{ width: "40%" }}></div>
-        </div>
-        <button className="mt-3 text-sm text-blue-600 underline">Customize Workout</button>
-      </header>
-      <div className="space-y-4">
-        {[
-          { id: 1, title: "Valuation Drill", icon: <IconValuation />, estimatedTime: "2 mins", color: "bg-blue-100" },
-          { id: 2, title: "Accounting Review", icon: <IconAccounting />, estimatedTime: "3 mins", color: "bg-green-100" },
-          { id: 3, title: "Markets Challenge", icon: <IconDailyWorkout />, estimatedTime: "2 mins", color: "bg-orange-100" }
-        ].map((mod) => (
-          <div
-            key={mod.id}
-            onClick={() => onSelectModule(mod)}
-            className={`p-4 ${mod.color} rounded-lg shadow cursor-pointer transition transform hover:scale-105`}
-          >
-            <div className="flex items-center">
-              <div className="p-3 bg-white rounded-full mr-4">{mod.icon}</div>
-              <div>
-                <h2 className="text-xl text-gray-700 font-medium">{mod.title}</h2>
-                <p className="text-sm text-gray-500">{mod.estimatedTime}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+// MARK: - View Model for Valuation Module
 
-// ---------- QuizScreen Component ---------- //
-function QuizScreen({ currentQuiz, qIndex, handleChoice, handleSubmit, selectedChoice, showResult, showExplanation, setShowExplanation }) {
-  return (
-    <div className="p-6">
-      <button onClick={() => {}} className="text-blue-600 text-sm underline mb-4">&larr; Back to Home</button>
-      <div className="mb-4">
-        <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
-        </div>
-      </div>
-      {qIndex !== -1 ? (
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl text-gray-800 mb-4">{currentQuiz[qIndex].question}</h2>
-          <div className="space-y-3">
-            {currentQuiz[qIndex].choices.map((choice, i) => {
-              let btnStyle = "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50";
-              if (showResult) {
-                if (i === currentQuiz[qIndex].answer) btnStyle = "bg-green-100 border-green-400 text-green-800";
-                else if (selectedChoice === i) btnStyle = "bg-red-100 border-red-400 text-red-800";
-              } else if (selectedChoice === i) {
-                btnStyle = "bg-blue-50 border-blue-300 text-blue-800";
-              }
-              return (
-                <button
-                  key={i}
-                  onClick={() => handleChoice(i)}
-                  className={`w-full p-3 rounded-lg transition duration-200 ${btnStyle}`}
-                >
-                  {choice}
-                </button>
-              );
-            })}
-          </div>
-          <button onClick={handleSubmit} className="mt-6 w-full py-3 bg-blue-600 text-white rounded-lg transition duration-200 hover:bg-blue-700">
-            Submit
-          </button>
-          {showResult && (
-            <div className="mt-4 text-gray-800">
-              {selectedChoice === currentQuiz[qIndex].answer ? (
-                <p className="text-green-600">Correct!</p>
-              ) : (
-                <p className="text-red-600">Incorrect</p>
-              )}
-              <button onClick={() => setShowExplanation((prev) => !prev)} className="mt-2 text-sm text-blue-600 underline">
-                {showExplanation ? "Hide Explanation" : "Show Explanation"}
-              </button>
-              {showExplanation && <p className="mt-2 text-gray-600">{currentQuiz[qIndex].explanation}</p>}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center text-center space-y-4">
-          <div className="text-5xl text-gray-800">🎉</div>
-          <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
-          <p className="text-lg text-gray-600">You completed the quiz!</p>
-          <button onClick={() => {}} className="bg-gray-800 text-white px-6 py-2 rounded-full shadow">
-            Back to Home
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ---------- PerformanceTracker Component ---------- //
-function PerformanceTracker({ performanceData }) {
-  return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4 border-b border-gray-200 pb-2 text-gray-800">Performance Tracker</h2>
-      {Object.keys(performanceData).length === 0 ? (
-        <p className="text-gray-600">No performance data yet.</p>
-      ) : (
-        <table className="w-full text-left">
-          <thead>
-            <tr>
-              <th className="py-2">Subject</th>
-              <th className="py-2">Quizzes</th>
-              <th className="py-2">Total Qs</th>
-              <th className="py-2">Correct</th>
-              <th className="py-2">Accuracy</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(performanceData).map((subject) => {
-              const data = performanceData[subject];
-              const accuracy = ((data.totalCorrect / data.totalQuestions) * 100).toFixed(1);
-              return (
-                <tr key={subject} className="border-b border-gray-100">
-                  <td className="py-2 text-gray-700">{subject}</td>
-                  <td className="py-2 text-gray-700">{data.quizzes}</td>
-                  <td className="py-2 text-gray-700">{data.totalQuestions}</td>
-                  <td className="py-2 text-gray-700">{data.totalCorrect}</td>
-                  <td className="py-2 text-gray-700">{accuracy}%</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-}
-
-// ---------- NewsScreen Component (Finance News + Subject Quiz) ---------- //
-function NewsScreen({ selectedModule }) {
-  const [headlines, setHeadlines] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-        const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=business&q=finance&apiKey=${apiKey}`
-        );
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-        const titles = data.articles.map((article) => article.title);
-        setHeadlines(titles);
-      } catch (err) {
-        console.error("Failed to fetch news:", err);
-        setError("Failed to fetch finance news.");
-      }
-    };
-    fetchNews();
-    const interval = setInterval(fetchNews, 15 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Determine subject-specific questions if a module is selected.
-  const subjectQuestions = selectedModule
-    ? selectedModule.title.includes("Valuation")
-      ? (questionsData["Valuation"]?.Basic || [])
-      : selectedModule.title.includes("Accounting")
-      ? (questionsData["Accounting"]?.Basic || [])
-      : selectedModule.title.includes("Markets")
-      ? getAggregatedDailyWorkout()
-      : []
-    : [];
-
-  return (
-    <div className="p-6">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Finance News Today</h2>
-      {error ? (
-        <p className="text-gray-600">{error}</p>
-      ) : headlines.length === 0 ? (
-        <p className="text-gray-600">Fetching finance news headlines...</p>
-      ) : (
-        <ul className="space-y-2">
-          {headlines.map((headline, i) => (
-            <li key={i} className="text-lg text-gray-700 border-b border-gray-200 pb-2">
-              {headline}
-            </li>
-          ))}
-        </ul>
-      )}
-      {selectedModule && subjectQuestions.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-gray-800">Quiz: {selectedModule.title}</h3>
-          <ul className="mt-2 space-y-2">
-            {subjectQuestions.map((q, index) => (
-              <li key={index} className="p-3 bg-gray-50 rounded shadow">
-                <p className="text-gray-800 font-medium">{q.question}</p>
-                <ul className="mt-1 space-y-1">
-                  {q.choices.map((choice, idx) => (
-                    <li key={idx} className="text-gray-600 text-sm">
-                      {choice}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ---------- MoreScreen Component (Internship Tracker Placeholder) ---------- //
-function MoreScreen() {
-  return (
-    <div className="p-6 text-gray-600 space-y-6">
-      <h2 className="text-2xl font-semibold text-gray-800">More</h2>
-      <div>
-        <h3 className="text-xl font-medium mb-2 text-gray-700">Internship Tracker</h3>
-        <p className="text-lg text-gray-700">[Internship tracker content placeholder]</p>
-      </div>
-    </div>
-  );
-}
-
-// ---------- Full Questions Data (Consolidated) ---------- //
-const questionsData = {
-  Accounting: {
-    Basic: [
-      { question: "Which of the following correctly lists the three major financial statements?", choices: ["Income Statement, Cash Flow Statement, Equity Statement", "Balance Sheet, Cash Flow Statement, Statement of Capital", "Income Statement, Balance Sheet, Cash Flow Statement", "Income Statement, Profit &amp; Loss Statement, Balance Sheet"], answer: 2 },
-      // ... rest of the Accounting Basic questions
-    ],
-    Advanced: [
-      { question: "GAAP accounting differs from tax accounting primarily because:", choices: ["GAAP is cash-based and tax accounting is accrual-based.", "GAAP uses accelerated depreciation methods, while tax accounting uses straight-line.", "GAAP is accrual-based and tax accounting is cash-based.", "Tax accounting more accurately tracks long-term liabilities."], answer: 2 },
-      // ... rest of the Accounting Advanced questions
-    ]
-  },
-  Valuation: {
-    Basic: [
-      { question: "Why do analysts consider both Enterprise Value and Equity Value?", choices: ["Equity Value shows market value, while Enterprise Value shows book value.", "Enterprise Value includes debt, whereas Equity Value does not.", "Equity Value is for creditors, Enterprise Value is for shareholders.", "Enterprise Value always equals Equity Value."], answer: 1 },
-      // ... rest of the Valuation Basic questions
-    ],
-    Advanced: [
-      { question: "When valuing banks and financial institutions, analysts typically use:", choices: ["EV/EBITDA multiples", "Dividend Discount Models (DDM) and P/E multiples", "Price-to-sales ratios", "Standard DCF models"], answer: 1 },
-      // ... rest of the Valuation Advanced questions
-    ]
-  },
-  "Discounted Cash Flow": {
-    Basic: [
-      { question: "A Discounted Cash Flow (DCF) valuation primarily relies on:", choices: ["Historical earnings", "Present Value of future cash flows and Terminal Value", "Book value of equity", "Dividend payments only"], answer: 1 },
-      // ... rest of the DCF Basic questions
-    ],
-    Advanced: [
-      { question: "Why is the mid-year convention used in a DCF?", choices: ["To simplify calculations", "Because cash flows arrive evenly throughout the year", "To inflate valuations artificially", "To ignore discounting completely"], answer: 1 },
-      // ... rest of the DCF Advanced questions
-    ]
-  },
-  "M&A": {
-    Basic: [
-      { question: "A merger model primarily helps determine:", choices: ["The tax benefits of a merger", "If the buyer’s EPS increases or decreases post-acquisition", "The impact on debt covenants", "Management compensation"], answer: 1 },
-      // ... rest of the M&A Basic questions
-    ],
-    Advanced: [
-      { question: "In an M&amp;A deal using purchase accounting:", choices: ["Shareholders&apos; equity numbers combine directly", "The seller&apos;s equity is wiped out and Goodwill is recorded", "Only tangible assets combine", "Intangible assets are ignored"], answer: 1 },
-      // ... rest of the M&A Advanced questions
-    ]
-  },
-  "LBO": {
-    Basic: [
-      { question: "What is the first step in an LBO model?", choices: ["Calculate interest payments", "Adjust balance sheet items", "Make assumptions about Purchase Price, Debt/Equity, and Interest Rate", "Determine the exit strategy"], answer: 2 },
-      // ... rest of the LBO Basic questions
-    ],
-    Advanced: [
-      { question: "In terms of seniority in a bankruptcy scenario, which debt holder typically gets paid first?", choices: ["Senior unsecured", "Senior secured", "Senior subordinated", "Equity investors"], answer: 1 },
-      // ... rest of the LBO Advanced questions
-    ]
-  },
-  "Brain Teaser": [
-    { question: "A car drives 60 miles at an average speed of 30 miles per hour. To travel the same 60 miles in the same amount of time at an average speed of 60 mph, how fast must the car drive?", choices: ["90 mph", "120 mph", "It's impossible", "60 mph"], answer: 2 },
-    // ... rest of the Brain Teaser questions
-  ]
-};
-
-// ---------- Daily Workout Aggregation ---------- //
-function getAggregatedDailyWorkout() {
-  let agg = [];
-  const dailyWorkoutSubjects = ["Accounting", "Valuation", "Discounted Cash Flow", "M&A", "LBO"];
-  dailyWorkoutSubjects.forEach((sub) => {
-    const subData = questionsData[sub];
-    if (subData && subData.Basic && subData.Basic.length >= 4) {
-      const shuffled = [...subData.Basic].sort(() => Math.random() - 0.5);
-      agg = agg.concat(shuffled.slice(0, 4));
+class ValuationViewModel: ObservableObject {
+    @Published var questions: [Question] = []
+    @Published var currentIndex: Int = 0
+    @Published var quizMode: QuizMode = .mcq
+    @Published var selectedOption: Int? = nil
+    @Published var showExplanation: Bool = false
+    @Published var answerSubmitted: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        loadQuestions()
     }
-  });
-  return agg.sort(() => Math.random() - 0.5);
+    
+    func loadQuestions() {
+        // Replace this with Bundle.main.url(forResource:) JSON decoding as needed.
+        // For now, using inline sample data:
+        let sampleQuestions: [Question] = [
+            Question(
+                id: 1,
+                prompt: "Which method best reflects intrinsic value?",
+                options: [
+                    "Discounted Cash Flow (DCF)",
+                    "Comparable Companies",
+                    "Precedent Transactions",
+                    "Sum-of-the-Parts"
+                ],
+                correctIndex: 0,
+                explanation: "DCF projects free cash flows and discounts them to present value to estimate intrinsic value."
+            ),
+            Question(
+                id: 2,
+                prompt: "In a DCF, what does the terminal value represent?",
+                options: [
+                    "The value of cash flows beyond the projection period",
+                    "The current market price",
+                    "Total equity value",
+                    "Net income of the final year"
+                ],
+                correctIndex: 0,
+                explanation: "Terminal value captures the value of all future cash flows beyond the explicit forecast period."
+            ),
+            Question(
+                id: 3,
+                prompt: "Flashcard: Define Free Cash Flow.",
+                options: [],
+                correctIndex: nil,
+                explanation: "Free Cash Flow is the cash a company generates after accounting for cash outflows to support operations and maintain its capital assets."
+            ),
+            Question(
+                id: 4,
+                prompt: "Which valuation multiple is most useful for comparing companies within the same industry?",
+                options: [
+                    "Price-to-Earnings (P/E)",
+                    "Enterprise Value/EBITDA",
+                    "Price-to-Book",
+                    "Dividend Yield"
+                ],
+                correctIndex: 1,
+                explanation: "EV/EBITDA is widely used to compare companies regardless of capital structure differences."
+            )
+        ]
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.questions = sampleQuestions
+        }
+    }
+    
+    func submitAnswer(_ option: Int) {
+        guard quizMode == .mcq,
+              let correct = questions[currentIndex].correctIndex,
+              !answerSubmitted else { return }
+        selectedOption = option
+        answerSubmitted = true
+    }
+    
+    func nextQuestion() {
+        withAnimation {
+            currentIndex += 1
+            selectedOption = nil
+            showExplanation = false
+            answerSubmitted = false
+        }
+    }
+    
+    func reset() {
+        currentIndex = 0
+        selectedOption = nil
+        showExplanation = false
+        answerSubmitted = false
+    }
 }
 
-// ---------- Main App Component ---------- //
-export default function FinancePrepApp() {
-  // Active Tab: "Home", "Performance", "News", "Notifications", "More"
-  const [activeTab, setActiveTab] = useState("Home");
-  const [selectedModule, setSelectedModule] = useState(null);
-  const [screen, setScreen] = useState("home"); // "home" or "quiz"
-  const [performanceData, setPerformanceData] = useState({});
-  const [qIndex, setQIndex] = useState(0);
-  const [selectedChoice, setSelectedChoice] = useState(null);
-  const [showResult, setShowResult] = useState(false);
-  const [showExplanation, setShowExplanation] = useState(false);
+// MARK: - User Progress Model
 
-  // Compute aggregated daily workout inside the component
-  const aggregatedDailyWorkout = useMemo(() => getAggregatedDailyWorkout(), []);
-
-  // Determine questions based on selected module.
-  // If module title is "Daily Workout", use aggregatedDailyWorkout; otherwise, use questionsData based on module title.
-  const subjectQuestions = useMemo(() => {
-    if (selectedModule) {
-      if (selectedModule.title === "Daily Workout") {
-        return aggregatedDailyWorkout;
-      } else {
-        return questionsData[selectedModule.title] || null;
-      }
+class UserProgress: ObservableObject {
+    @Published var xp: Int = 0
+    @Published var streak: Int = 0
+    
+    func addXP(_ points: Int) {
+        xp += points
     }
-    return null;
-  }, [selectedModule, aggregatedDailyWorkout]);
-
-  // If subjectQuestions is an object (has Basic/Advanced), default to "Basic" set.
-  const hasCategories = subjectQuestions && typeof subjectQuestions === "object" && !Array.isArray(subjectQuestions);
-  const currentQuiz = useMemo(() => {
-    if (hasCategories) {
-      return subjectQuestions["Basic"] || [];
-    } else if (subjectQuestions) {
-      return subjectQuestions;
+    
+    func incrementStreak() {
+        streak += 1
     }
-    return [];
-  }, [hasCategories, subjectQuestions]);
+    
+    func resetStreak() {
+        streak = 0
+    }
+}
 
-  const handleChoice = (index) => {
-    setSelectedChoice(index);
-    setShowResult(true);
-  };
+// MARK: - Home/Dashboard View
 
-  const handleSubmit = () => {
-    setTimeout(() => {
-      setShowResult(false);
-      setSelectedChoice(null);
-      setShowExplanation(false);
-      setQIndex((prev) => (prev + 1 < currentQuiz.length ? prev + 1 : -1));
-    }, 1200);
-  };
+struct HomeView: View {
+    @StateObject private var userProgress = UserProgress()
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 20) {
+                // Welcome and Progress Info
+                VStack {
+                    Text("Welcome back, Will!")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                    HStack {
+                        Text("Streak: \(userProgress.streak)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("XP: \(userProgress.xp)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal)
+                }
+                
+                // XP Progress Bar
+                XPProgressBar(xp: userProgress.xp, xpGoal: 1000)
+                    .frame(height: 20)
+                    .padding(.horizontal)
+                
+                // Module Card for Valuation
+                NavigationLink(destination: ValuationModuleView(userProgress: userProgress)) {
+                    ModuleCardView(
+                        title: "Valuation",
+                        subtitle: "Master your DCF skills",
+                        imageName: "chart.bar.xaxis",
+                        color: .blue
+                    )
+                }
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Dashboard")
+        }
+    }
+}
 
-  return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      <div className="relative w-full max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden flex flex-col">
-        {/* Header */}
-        <header className="flex items-center p-6 border-b border-gray-200">
-          <div
-            className="w-14 h-14 flex items-center justify-center text-white rounded-full"
-            style={{
-              backgroundColor: "#2D2E82",
-              clipPath: "polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)"
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v2H7v4h2v2h6v-2h2v-4h-2v-2c0-1.657-1.343-3-3-3z" />
-            </svg>
-          </div>
-          <div className="ml-4">
-            <h1 className="text-2xl text-gray-800">TechnicalPrep</h1>
-            <p className="text-sm text-gray-500">Daily Streak &amp; XP</p>
-          </div>
-        </header>
+struct ModuleCardView: View {
+    let title: String
+    let subtitle: String
+    let imageName: String
+    let color: Color
+    
+    @State private var animate = false
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(color.opacity(0.2))
+                .shadow(radius: 5)
+            HStack(spacing: 15) {
+                Image(systemName: imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(color)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(title)
+                        .font(.headline)
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+                Spacer()
+            }
+            .padding()
+        }
+        .frame(height: 120)
+        .padding(.horizontal)
+        .scaleEffect(animate ? 1.05 : 1.0)
+        .onAppear {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.5, blendDuration: 0)) {
+                animate = true
+            }
+        }
+    }
+}
 
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto">
-          {activeTab === "Home" && screen === "home" && !selectedModule && (
-            <HomeScreen onSelectModule={(mod) => { setSelectedModule(mod); setScreen("quiz"); setQIndex(0); }} />
-          )}
-          {activeTab === "Home" && screen === "quiz" && selectedModule && currentQuiz.length > 0 && (
-            <div className="p-6">
-              <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="text-blue-600 text-sm underline mb-4">
-                &larr; Back to Home
-              </button>
-              <div className="mb-4">
-                <p className="text-sm text-gray-500">Question {qIndex + 1} of {currentQuiz.length}</p>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${((qIndex + 1) / currentQuiz.length) * 100}%` }}></div>
-                </div>
-              </div>
-              {qIndex !== -1 ? (
-                <QuizScreen
-                  currentQuiz={currentQuiz}
-                  qIndex={qIndex}
-                  handleChoice={handleChoice}
-                  handleSubmit={handleSubmit}
-                  selectedChoice={selectedChoice}
-                  showResult={showResult}
-                  showExplanation={showExplanation}
-                  setShowExplanation={setShowExplanation}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="text-5xl text-gray-800">🎉</div>
-                  <h2 className="text-2xl text-gray-700 font-medium">Workout Complete!</h2>
-                  <p className="text-lg text-gray-600">You completed the quiz!</p>
-                  <button onClick={() => { setSelectedModule(null); setScreen("home"); }} className="bg-gray-800 text-white px-6 py-2 rounded-full shadow">
-                    Back to Home
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-          {activeTab === "Performance" && <PerformanceTracker performanceData={performanceData} />}
-          {activeTab === "News" && <NewsScreen selectedModule={selectedModule} />}
-          {activeTab === "Notifications" && (
-            <div className="p-6 text-gray-600">Notifications placeholder</div>
-          )}
-          {activeTab === "More" && <MoreScreen />}
-        </div>
+// MARK: - XP Progress Bar
 
-        {/* Bottom Navigation */}
-        <nav className="bg-white border-t border-gray-200 flex justify-around py-4">
-          <NavItem icon={<IconDailyWorkout />} label="Home" active={activeTab === "Home"} onClick={() => { setActiveTab("Home"); setScreen("home"); }} />
-          <NavItem icon={<IconPerformance />} label="Performance" active={activeTab === "Performance"} onClick={() => setActiveTab("Performance")} />
-          <NavItem icon={<IconDCF />} label="News" active={activeTab === "News"} onClick={() => setActiveTab("News")} />
-          <NavItem icon={<IconNotifications />} label="Notifications" active={activeTab === "Notifications"} onClick={() => setActiveTab("Notifications")} />
-          <NavItem icon={<IconMore />} label="More" active={activeTab === "More"} onClick={() => setActiveTab("More")} />
-        </nav>
-      </div>
-    </div>
-  );
+struct XPProgressBar: View {
+    var xp: Int
+    var xpGoal: Int
+    
+    var progress: CGFloat {
+        min(CGFloat(xp) / CGFloat(xpGoal), 1.0)
+    }
+    
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: geo.size.height / 2)
+                    .fill(Color.gray.opacity(0.3))
+                RoundedRectangle(cornerRadius: geo.size.height / 2)
+                    .fill(Color.green)
+                    .frame(width: geo.size.width * progress)
+                    .animation(.linear(duration: 0.5), value: xp)
+            }
+        }
+    }
+}
+
+// MARK: - Valuation Module View
+
+struct ValuationModuleView: View {
+    @ObservedObject var userProgress: UserProgress
+    @StateObject private var viewModel = ValuationViewModel()
+    
+    var body: some View {
+        VStack {
+            // Segmented control to switch between modes
+            Picker("Quiz Mode", selection: $viewModel.quizMode) {
+                ForEach(QuizMode.allCases, id: \.self) { mode in
+                    Text(mode.rawValue)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
+            // Question counter
+            Text("Question \(min(viewModel.currentIndex + 1, viewModel.questions.count)) of \(viewModel.questions.count)")
+                .font(.subheadline)
+                .padding(.top, 5)
+            
+            // Display current question depending on quiz mode
+            if viewModel.currentIndex < viewModel.questions.count {
+                if viewModel.quizMode == .mcq {
+                    MCQQuestionView(viewModel: viewModel)
+                } else {
+                    FlashcardView(question: viewModel.questions[viewModel.currentIndex])
+                }
+            } else {
+                // Completion screen
+                VStack(spacing: 20) {
+                    Text("Workout Complete!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Button(action: {
+                        viewModel.reset()
+                    }) {
+                        Text("Restart Module")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding()
+            }
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Valuation Module")
+        .onChange(of: viewModel.currentIndex) { newIndex in
+            // Update user progress when a question is answered
+            if newIndex < viewModel.questions.count {
+                if viewModel.quizMode == .mcq {
+                    if let selected = viewModel.selectedOption,
+                       let correct = viewModel.questions[newIndex - 1].correctIndex {
+                        if selected == correct {
+                            userProgress.addXP(100)
+                            userProgress.incrementStreak()
+                            generateHapticFeedback(success: true)
+                        } else {
+                            userProgress.resetStreak()
+                            generateHapticFeedback(success: false)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func generateHapticFeedback(success: Bool) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(success ? .success : .error)
+    }
+}
+
+// MARK: - MCQ Question View
+
+struct MCQQuestionView: View {
+    @ObservedObject var viewModel: ValuationViewModel
+    
+    var body: some View {
+        let question = viewModel.questions[viewModel.currentIndex]
+        VStack(alignment: .leading, spacing: 20) {
+            Text(question.prompt)
+                .font(.headline)
+            ForEach(0..<question.options.count, id: \.self) { index in
+                AnswerOptionView(optionText: question.options[index],
+                                 isSelected: viewModel.selectedOption == index,
+                                 isCorrect: viewModel.answerSubmitted && (index == question.correctIndex))
+                    .onTapGesture {
+                        if viewModel.selectedOption == nil {
+                            viewModel.submitAnswer(index)
+                            // Delay before moving on to next question
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                withAnimation {
+                                    viewModel.nextQuestion()
+                                }
+                            }
+                        }
+                    }
+            }
+            if viewModel.answerSubmitted, viewModel.showExplanation || viewModel.selectedOption != nil {
+                Text("Explanation: \(question.explanation)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .transition(.opacity)
+            }
+            if viewModel.answerSubmitted {
+                Button(action: {
+                    withAnimation {
+                        viewModel.showExplanation.toggle()
+                    }
+                }) {
+                    Text(viewModel.showExplanation ? "Hide Explanation" : "Show Explanation")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(UIColor.secondarySystemBackground))
+                .shadow(radius: 5)
+        )
+        .transition(.slide)
+    }
+}
+
+// MARK: - Flashcard View
+
+struct FlashcardView: View {
+    let question: Question
+    @State private var showAnswer = false
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text(question.prompt)
+                .font(.headline)
+                .padding()
+            if showAnswer {
+                Text(question.explanation)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding()
+                    .transition(.opacity)
+            } else {
+                Text("Tap to reveal the answer")
+                    .font(.footnote)
+                    .foregroundColor(.blue)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(UIColor.tertiarySystemBackground))
+                .shadow(radius: 5)
+        )
+        .onTapGesture {
+            withAnimation {
+                showAnswer.toggle()
+            }
+        }
+    }
+}
+
+// MARK: - Reusable Answer Option View
+
+struct AnswerOptionView: View {
+    let optionText: String
+    let isSelected: Bool
+    let isCorrect: Bool
+    
+    var body: some View {
+        HStack {
+            Text(optionText)
+                .foregroundColor(.primary)
+                .padding()
+            Spacer()
+            if isSelected {
+                Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                    .foregroundColor(isCorrect ? .green : .red)
+                    .padding(.trailing)
+            }
+        }
+        .background(isSelected ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+        .cornerRadius(10)
+        .padding(.vertical, 4)
+    }
+}
+
+// MARK: - Preview
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
 }
